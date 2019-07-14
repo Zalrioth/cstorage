@@ -1,6 +1,6 @@
-compiler:
-  - clang
-  - gcc
-  apt:
-    sources:
-      - src
+language: c
+sudo: false
+script:
+  - clang -coverage -O0 src/test.c -o test
+  - ./test
+  - gcov test.c
