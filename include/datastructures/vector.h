@@ -46,13 +46,6 @@ static inline void vector_Resize(struct Vector* v, int capacity)
     }
 }
 
-static inline void vector_Swap(struct Vector* v1, struct Vector* v2)
-{
-    struct Vector* vTemp = v1;
-    v1 = v2;
-    v2 = vTemp;
-}
-
 static inline void vector_PushBack(struct Vector* v, void* item)
 {
     if (v->capacity == v->size)
