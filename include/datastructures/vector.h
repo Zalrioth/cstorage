@@ -8,9 +8,9 @@
 
 struct Vector {
     void* items; // Pointer to start of data
-    int capacity; // Total size of vector currently allocated in memory
-    int size; // Number of items currently in vector
-    int memorySize; // How much memory each vector item takes
+    unsigned int capacity; // Total size of vector currently allocated in memory
+    unsigned int size; // Number of items currently in vector
+    unsigned int memorySize; // How much memory each vector item takes
 };
 
 static inline void vector_Init(struct Vector* v, int memorySize)
@@ -33,13 +33,14 @@ static inline int vector_Capactiy(struct Vector* v)
 
 static inline int vector_Empty(struct Vector* v)
 {
-    return (v->size == 0) ? 1 : 0;
+    return v->size == 0;
 }
 
 static inline void vector_Resize(struct Vector* v, int capacity)
 {
     void* newItems = realloc((char*)v->items, v->memorySize * capacity);
 
+    // If realloc fails vector will not be resized
     if (newItems) {
         v->items = newItems;
         v->capacity = capacity;
@@ -94,7 +95,7 @@ static inline void* vector_Get(struct Vector* v, int index)
 
 static inline int vector_Exists(struct Vector* v, int index)
 {
-    return (index >= 0 && index < v->size) ? 1 : 0;
+    return index >= 0 && index < v->size;
 }
 
 static inline void vector_Remove(struct Vector* v, int index)

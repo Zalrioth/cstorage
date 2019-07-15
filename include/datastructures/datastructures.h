@@ -3,4 +3,6 @@
 
 #define BOUNDS_CHECK
 
+#include "queue.h"
+#include "stack.h"
 #include "vector.h"
