@@ -4,51 +4,51 @@
 int main(int argc, char* argv[])
 {
     struct Vector vec;
-    vector_Init(&vec, sizeof(int));
+    vector_init(&vec, sizeof(int));
 
     int testNum = 10;
 
-    vector_PushBack(&vec, &testNum);
-    vector_PushBack(&vec, &testNum);
-    vector_PushBack(&vec, &testNum);
-    vector_PushBack(&vec, &testNum);
+    vector_push_back(&vec, &testNum);
+    vector_push_back(&vec, &testNum);
+    vector_push_back(&vec, &testNum);
+    vector_push_back(&vec, &testNum);
 
-    printf("Num: %d\n", *(int*)vector_Get(&vec, 3));
+    printf("Num: %d\n", *(int*)vector_get(&vec, 3));
 
-    printf("Total: %d\n", vector_Size(&vec));
-    printf("Size: %d\n", vector_Size(&vec));
+    printf("Total: %d\n", vector_size(&vec));
+    printf("Size: %d\n", vector_size(&vec));
 
-    vector_PushBack(&vec, &testNum);
-    vector_PushBack(&vec, &testNum);
+    vector_push_back(&vec, &testNum);
+    vector_push_back(&vec, &testNum);
 
-    printf("Total: %d\n", vector_Size(&vec));
-    printf("Size: %d\n", vector_Size(&vec));
+    printf("Total: %d\n", vector_size(&vec));
+    printf("Size: %d\n", vector_size(&vec));
 
-    vector_Remove(&vec, 0);
-    vector_Remove(&vec, 0);
-    vector_Remove(&vec, 0);
-    vector_Remove(&vec, 0);
+    vector_remove(&vec, 0);
+    vector_remove(&vec, 0);
+    vector_remove(&vec, 0);
+    vector_remove(&vec, 0);
 
-    printf("Total: %d\n", vector_Size(&vec));
-    printf("Size: %d\n", vector_Size(&vec));
+    printf("Total: %d\n", vector_size(&vec));
+    printf("Size: %d\n", vector_size(&vec));
 
     int testNum2 = 20;
 
-    vector_Insert(&vec, 1, &testNum2);
+    vector_insert(&vec, 1, &testNum2);
 
-    printf("Num: %d\n", *(int*)vector_Get(&vec, 1));
+    printf("Num: %d\n", *(int*)vector_get(&vec, 1));
 
-    printf("Total: %d\n", vector_Size(&vec));
-    printf("Size: %d\n", vector_Size(&vec));
+    printf("Total: %d\n", vector_size(&vec));
+    printf("Size: %d\n", vector_size(&vec));
 
-    if (vector_Get(&vec, 10) == NULL)
+    if (vector_get(&vec, 10) == NULL)
         printf("Outside of vector!\n");
 #ifndef BOUNDS_CHECK
     else
         printf("Bounds check off!");
 #endif
 
-    vector_Delete(&vec);
+    vector_delete(&vec);
 
     return 0;
 }
