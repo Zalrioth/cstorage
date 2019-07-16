@@ -20,7 +20,7 @@ Priority Queue<br/>
 
 ### Planned
 
-Associated Array<br/>
+Associative Array<br/>
 Singly Linked List<br/>
 Doubly Linked List<br/>
 Hash Set<br/>
