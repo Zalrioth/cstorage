@@ -14,5 +14,15 @@ Vector(memory aligned)
 
 ### In Progress
 
-Stack
-Queue
+Stack<br/>
+Queue<br/>
+Priority Queue<br/>
+
+### Planned
+
+Associated Array<br/>
+Singly Linked List<br/>
+Doubly Linked List<br/>
+Hash Set<br/>
+Hash Table<br/>
+Trees
