@@ -25,4 +25,5 @@ Singly Linked List<br/>
 Doubly Linked List<br/>
 Hash Set<br/>
 Hash Table<br/>
-Trees
+Quadtree<br/>
+Octree<br/>
