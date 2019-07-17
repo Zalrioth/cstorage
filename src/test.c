@@ -3,6 +3,7 @@
 
 int main(int argc, char* argv[])
 {
+    // Vector test
     struct Vector vec;
     vector_init(&vec, sizeof(int));
 
@@ -49,6 +50,21 @@ int main(int argc, char* argv[])
 #endif
 
     vector_delete(&vec);
+
+    // Stack test
+    struct Stack stack;
+
+    stack_init(&stack, sizeof(int));
+
+    int val1 = 10;
+    int val2 = 20;
+    int val3 = 30;
+
+    stack_push(&stack, &val1);
+    stack_push(&stack, &val2);
+    stack_push(&stack, &val3);
+
+    printf("%d popped from stack!\n", *(int*)stack_peek(&stack));
 
     return 0;
 }

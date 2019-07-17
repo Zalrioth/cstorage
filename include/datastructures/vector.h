@@ -7,127 +7,127 @@
 #define VECTOR_INIT_CAPACITY 4
 
 struct Vector {
-    unsigned int capacity; // Total size of vector currently allocated in memory
     unsigned int size; // Number of items currently in vector
+    unsigned int capacity; // Total size of vector currently allocated in memory
     unsigned int memory_size; // How much memory each vector item takes
     void* items; // Pointer to start of data
 };
 
-static inline void vector_init(struct Vector* v, int memory_size)
+static inline void vector_init(struct Vector* vector, int memory_size)
 {
-    v->capacity = VECTOR_INIT_CAPACITY;
-    v->size = 0;
-    v->memory_size = memory_size;
-    v->items = malloc(memory_size * v->capacity);
+    vector->size = 0;
+    vector->capacity = VECTOR_INIT_CAPACITY;
+    vector->memory_size = memory_size;
+    vector->items = malloc(memory_size * vector->capacity);
 }
 
-static inline int vector_size(struct Vector* v)
+static inline int vector_size(struct Vector* vector)
 {
-    return v->size;
+    return vector->size;
 }
 
-static inline int vector_capactiy(struct Vector* v)
+static inline int vector_capactiy(struct Vector* vector)
 {
-    return v->capacity;
+    return vector->capacity;
 }
 
-static inline int vector_empty(struct Vector* v)
+static inline int vector_empty(struct Vector* vector)
 {
-    return v->size == 0;
+    return vector->size == 0;
 }
 
-static inline void vector_resize(struct Vector* v, int capacity)
+static inline void vector_resize(struct Vector* vector, int capacity)
 {
-    void* newItems = realloc((char*)v->items, v->memory_size * capacity);
+    void* newItems = realloc((char*)vector->items, vector->memory_size * capacity);
 
     // If realloc fails vector will not be resized
     if (newItems) {
-        v->items = newItems;
-        v->capacity = capacity;
+        vector->items = newItems;
+        vector->capacity = capacity;
     }
 }
 
-static inline void vector_push_back(struct Vector* v, void* item)
+static inline void vector_push_back(struct Vector* vector, void* item)
 {
-    if (v->capacity == v->size)
-        vector_resize(v, v->capacity * 2);
+    if (vector->capacity == vector->size)
+        vector_resize(vector, vector->capacity * 2);
 
-    memcpy((char*)v->items + (v->memory_size * v->size), item, v->memory_size);
-    v->size++;
+    memcpy((char*)vector->items + (vector->memory_size * vector->size), item, vector->memory_size);
+    vector->size++;
 }
 
-static inline void vector_insert(struct Vector* v, int index, void* item)
+static inline void vector_insert(struct Vector* vector, int index, void* item)
 {
 #ifdef BOUNDS_CHECK
-    if (index < 0 || index >= v->size)
+    if (index < 0 || index >= vector->size)
         return;
 #endif
-    if (v->capacity == v->size)
-        vector_resize(v, v->capacity * 2);
+    if (vector->capacity == vector->size)
+        vector_resize(vector, vector->capacity * 2);
 
-    memmove((char*)v->items + (v->memory_size * (index + 1)), (char*)v->items + (v->memory_size * index), v->memory_size * (v->size - (index + 1) + 1));
-    memcpy((char*)v->items + (v->memory_size * index), item, v->memory_size);
+    memmove((char*)vector->items + (vector->memory_size * (index + 1)), (char*)vector->items + (vector->memory_size * index), vector->memory_size * (vector->size - (index + 1) + 1));
+    memcpy((char*)vector->items + (vector->memory_size * index), item, vector->memory_size);
 
-    v->size++;
+    vector->size++;
 }
 
-static inline void vector_set(struct Vector* v, int index, void* item)
+static inline void vector_set(struct Vector* vector, int index, void* item)
 {
 #ifdef BOUNDS_CHECK
-    if (index >= 0 && index < v->size)
-        memcpy((char*)v->items + (v->memory_size * index), item, v->memory_size);
+    if (index >= 0 && index < vector->size)
+        memcpy((char*)vector->items + (vector->memory_size * index), item, vector->memory_size);
 #else
-    memcpy((char*)v->items + (v->memory_size * index), item, v->memory_size);
+    memcpy((char*)vector->items + (vector->memory_size * index), item, vector->memory_size);
 #endif
 }
 
-static inline void* vector_get(struct Vector* v, int index)
+static inline void* vector_get(struct Vector* vector, int index)
 {
 #ifdef BOUNDS_CHECK
-    if (index >= 0 && index < v->size)
-        return (char*)v->items + (v->memory_size * index);
+    if (index >= 0 && index < vector->size)
+        return (char*)vector->items + (vector->memory_size * index);
 
     return NULL;
 #else
-    return (char*)v->items + (v->memory_size * index);
+    return (char*)vector->items + (vector->memory_size * index);
 #endif
 }
 
-static inline int vector_exists(struct Vector* v, int index)
+static inline int vector_exists(struct Vector* vector, int index)
 {
-    return index >= 0 && index < v->size;
+    return index >= 0 && index < vector->size;
 }
 
-static inline void vector_remove(struct Vector* v, int index)
+static inline void vector_remove(struct Vector* vector, int index)
 {
 #ifdef BOUNDS_CHECK
-    if (index < 0 || index >= v->size)
+    if (index < 0 || index >= vector->size)
         return;
 #endif
-    memmove((char*)v->items + (v->memory_size * index), (char*)v->items + (v->memory_size * (index + 1)), v->memory_size * (v->size - (index + 1)));
+    memmove((char*)vector->items + (vector->memory_size * index), (char*)vector->items + (vector->memory_size * (index + 1)), vector->memory_size * (vector->size - (index + 1)));
 
-    v->size--;
+    vector->size--;
 
-    if (v->size > 0 && v->size == v->capacity / 4)
-        vector_resize(v, v->capacity / 2);
+    if (vector->size > 0 && vector->size == vector->capacity / 4)
+        vector_resize(vector, vector->capacity / 2);
 }
 
-static inline void vector_clear(struct Vector* v)
+static inline void vector_clear(struct Vector* vector)
 {
-    memset((char*)v->items, 0, v->memory_size * v->capacity);
-    v->size = 0;
-    vector_resize(v, VECTOR_INIT_CAPACITY);
+    memset((char*)vector->items, 0, vector->memory_size * vector->capacity);
+    vector->size = 0;
+    vector_resize(vector, VECTOR_INIT_CAPACITY);
 }
 
-static inline void vector_free(struct Vector* v)
+static inline void vector_free(struct Vector* vector)
 {
-    free(v->items);
+    free(vector->items);
 }
 
-static inline void vector_delete(struct Vector* v)
+static inline void vector_delete(struct Vector* vector)
 {
-    vector_clear(v);
-    free(v->items);
+    vector_clear(vector);
+    free(vector->items);
 }
 
 #endif
