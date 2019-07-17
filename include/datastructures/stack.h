@@ -40,8 +40,7 @@ static inline void stack_push(struct Stack* stack, void* item)
     if (stack->capacity == stack->top)
         stack_resize(stack, stack->capacity * 2);
 
-    memcpy((char*)stack->items + (stack->memory_size * stack->top), item, stack->memory_size);
-    stack->top++;
+    memcpy((char*)stack->items + (stack->memory_size * stack->top++), item, stack->memory_size);
 }
 
 static inline void* stack_pop(struct Stack* stack)
@@ -50,16 +49,17 @@ static inline void* stack_pop(struct Stack* stack)
     if (stack_empty(stack))
         return NULL;
 #endif
-    return (char*)stack->items + (stack->memory_size * stack->top--);
+    return (char*)stack->items + (stack->memory_size * (--stack->top));
 }
 
+//TODO: Check asm here could be optimized probably
 static inline void* stack_peek(struct Stack* stack)
 {
 #ifdef BOUNDS_CHECK
     if (stack_empty(stack))
         return NULL;
 #endif
-    return (char*)stack->items + (stack->memory_size * stack->top);
+    return (char*)stack->items + (stack->memory_size * (stack->top - 1));
 }
 
 #endif

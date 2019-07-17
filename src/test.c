@@ -64,7 +64,26 @@ int main(int argc, char* argv[])
     stack_push(&stack, &val2);
     stack_push(&stack, &val3);
 
-    printf("%d popped from stack!\n", *(int*)stack_peek(&stack));
+    printf("%d peeked on stack!\n", *(int*)stack_peek(&stack));
+    printf("%d popped from stack!\n", *(int*)stack_pop(&stack));
+    printf("%d peeked from stack!\n", *(int*)stack_peek(&stack));
+
+    stack_push(&stack, &val1);
+    stack_push(&stack, &val2);
+    stack_push(&stack, &val3);
+
+    printf("%d popped from stack!\n", *(int*)stack_pop(&stack));
+    printf("%d popped from stack!\n", *(int*)stack_pop(&stack));
+    printf("%d popped from stack!\n", *(int*)stack_pop(&stack));
+    printf("%d popped from stack!\n", *(int*)stack_pop(&stack));
+    printf("%d popped from stack!\n", *(int*)stack_pop(&stack));
+
+    if (stack_pop(&stack) == NULL)
+        printf("Stack empty!\n");
+#ifndef BOUNDS_CHECK
+    else
+        printf("Bounds check off!");
+#endif
 
     return 0;
 }
