@@ -10,11 +10,11 @@ Include the datastructures.h header and you're ready to go.
 
 ### Implemented
 
-Vector(memory aligned)
+Vector<br/>
+Stack<br/>
 
 ### In Progress
 
-Stack<br/>
 Queue<br/>
 Priority Queue<br/>
 
