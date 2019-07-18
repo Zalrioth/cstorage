@@ -21,6 +21,11 @@ static inline void vector_init(struct Vector* vector, int memory_size)
     vector->items = malloc(memory_size * vector->capacity);
 }
 
+static inline void vector_delete(struct Vector* vector)
+{
+    free(vector->items);
+}
+
 static inline int vector_size(struct Vector* vector)
 {
     return vector->size;
@@ -118,11 +123,6 @@ static inline void vector_clear(struct Vector* vector)
     vector->capacity = VECTOR_INIT_CAPACITY;
     free(vector->items);
     vector->items = malloc(vector->memory_size * vector->capacity);
-}
-
-static inline void vector_delete(struct Vector* vector)
-{
-    free(vector->items);
 }
 
 #endif

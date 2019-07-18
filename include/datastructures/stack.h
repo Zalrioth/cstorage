@@ -19,9 +19,24 @@ static inline void stack_init(struct Stack* stack, int memory_size)
     stack->items = malloc(memory_size * stack->capacity);
 }
 
+static inline void stack_delete(struct Stack* stack)
+{
+    free(stack->items);
+}
+
 static inline int stack_empty(struct Stack* stack)
 {
     return stack->top == 0;
+}
+
+static inline int stack_size(struct Stack* stack)
+{
+    return stack->top;
+}
+
+static inline int stack_capacity(struct Stack* stack)
+{
+    return stack->capacity;
 }
 
 static inline void stack_resize(struct Stack* stack, int capacity)
@@ -60,6 +75,14 @@ static inline void* stack_peek(struct Stack* stack)
         return NULL;
 #endif
     return (char*)stack->items + (stack->memory_size * (stack->top - 1));
+}
+
+static inline void stack_clear(struct Stack* stack)
+{
+    stack->top = 0;
+    stack->capacity = STACK_INIT_CAPACITY;
+    free(stack->items);
+    stack->items = malloc(stack->memory_size * stack->capacity);
 }
 
 #endif

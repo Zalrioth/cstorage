@@ -50,6 +50,8 @@ int main(int argc, char* argv[])
 
     printf("Clearing vector!\n");
 
+    vector_clear(&vec);
+
     vector_insert(&vec, 1, &testNum1);
     vector_insert(&vec, 1, &testNum2);
 
@@ -92,6 +94,21 @@ int main(int argc, char* argv[])
     else
         printf("Bounds check off!");
 #endif
+
+    printf("Clearing stack!\n");
+
+    stack_clear(&stack);
+
+    stack_push(&stack, &val1);
+    stack_push(&stack, &val2);
+    stack_push(&stack, &val3);
+
+    printf("%d popped from stack!\n", *(int*)stack_pop(&stack));
+    printf("Size: %d\n", stack_size(&stack));
+    printf("%d popped from stack!\n", *(int*)stack_pop(&stack));
+    printf("Size: %d\n", stack_size(&stack));
+
+    stack_delete(&stack);
 
     return 0;
 }
