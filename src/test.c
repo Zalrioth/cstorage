@@ -52,8 +52,8 @@ int main(int argc, char* argv[])
 
     vector_clear(&vec);
 
-    vector_insert(&vec, 1, &testNum1);
-    vector_insert(&vec, 1, &testNum2);
+    vector_push_back(&vec, &testNum1);
+    vector_push_back(&vec, &testNum2);
 
     printf("Num: %d\n", *(int*)vector_get(&vec, 1));
     printf("Total: %d\n", vector_size(&vec));
