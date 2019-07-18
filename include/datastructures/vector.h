@@ -114,19 +114,14 @@ static inline void vector_remove(struct Vector* vector, int index)
 
 static inline void vector_clear(struct Vector* vector)
 {
-    memset((char*)vector->items, 0, vector->memory_size * vector->capacity);
     vector->size = 0;
-    vector_resize(vector, VECTOR_INIT_CAPACITY);
-}
-
-static inline void vector_free(struct Vector* vector)
-{
+    vector->capacity = VECTOR_INIT_CAPACITY;
     free(vector->items);
+    vector->items = malloc(vector->memory_size * vector->capacity);
 }
 
 static inline void vector_delete(struct Vector* vector)
 {
-    vector_clear(vector);
     free(vector->items);
 }
 

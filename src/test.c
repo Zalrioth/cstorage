@@ -7,20 +7,20 @@ int main(int argc, char* argv[])
     struct Vector vec;
     vector_init(&vec, sizeof(int));
 
-    int testNum = 10;
+    int testNum1 = 10;
 
-    vector_push_back(&vec, &testNum);
-    vector_push_back(&vec, &testNum);
-    vector_push_back(&vec, &testNum);
-    vector_push_back(&vec, &testNum);
+    vector_push_back(&vec, &testNum1);
+    vector_push_back(&vec, &testNum1);
+    vector_push_back(&vec, &testNum1);
+    vector_push_back(&vec, &testNum1);
 
     printf("Num: %d\n", *(int*)vector_get(&vec, 3));
 
     printf("Total: %d\n", vector_size(&vec));
     printf("Size: %d\n", vector_size(&vec));
 
-    vector_push_back(&vec, &testNum);
-    vector_push_back(&vec, &testNum);
+    vector_push_back(&vec, &testNum1);
+    vector_push_back(&vec, &testNum1);
 
     printf("Total: %d\n", vector_size(&vec));
     printf("Size: %d\n", vector_size(&vec));
@@ -38,7 +38,6 @@ int main(int argc, char* argv[])
     vector_insert(&vec, 1, &testNum2);
 
     printf("Num: %d\n", *(int*)vector_get(&vec, 1));
-
     printf("Total: %d\n", vector_size(&vec));
     printf("Size: %d\n", vector_size(&vec));
 
@@ -48,6 +47,15 @@ int main(int argc, char* argv[])
     else
         printf("Bounds check off!");
 #endif
+
+    printf("Clearing vector!\n");
+
+    vector_insert(&vec, 1, &testNum1);
+    vector_insert(&vec, 1, &testNum2);
+
+    printf("Num: %d\n", *(int*)vector_get(&vec, 1));
+    printf("Total: %d\n", vector_size(&vec));
+    printf("Size: %d\n", vector_size(&vec));
 
     vector_delete(&vec);
 
