@@ -12,16 +12,17 @@ Include the datastructures.h header and you're ready to go. Vector is memory ali
 
 Vector<br/>
 Stack<br/>
+Queue<br/>
 
 ### In Progress
 
-Queue<br/>
 Priority Queue<br/>
 
 ### Planned
 
 Map<br/>
 Deque<br/>
+Entity Vector<br/>
 Singly Linked List<br/>
 Doubly Linked List<br/>
 Hash Set<br/>
