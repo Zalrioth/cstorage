@@ -111,6 +111,8 @@ static inline void queue_clear(struct Queue* queue)
         queue->head = temp_node;
         queue->size--;
     }
+
+    queue->head = queue->tail = NULL;
 }
 
 #endif

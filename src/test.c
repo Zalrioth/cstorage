@@ -179,7 +179,7 @@ int queue_test()
 
     queue_clear(&queue);
 
-    //queue_delete(&queue);
+    queue_delete(&queue);
 
     return 0;
 }
