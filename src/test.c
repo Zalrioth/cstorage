@@ -177,7 +177,7 @@ int queue_test()
     if (queue_empty(&queue))
         printf("Queue is empty!\n");
 
-    queue_clear(&queue);
+    //queue_clear(&queue);
 
     queue_delete(&queue);
 
