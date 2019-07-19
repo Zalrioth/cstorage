@@ -140,7 +140,7 @@ int main(int argc, char* argv[])
 
     printf("Final popped value: %d\n", *popNum);
 
-    if (queue_size(&queue) == 0)
+    if (queue_empty(&queue))
         printf("Queue is empty!\n");
 
     queue_clear(&queue);
