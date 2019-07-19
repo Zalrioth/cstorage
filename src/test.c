@@ -7,17 +7,17 @@ int queue_test();
 
 int main(int argc, char* argv[])
 {
-    if (vector_test == 0)
+    if (vector_test() == 0)
         printf("Vector test passed!\n");
     else
         printf("Vector test failed!\n");
 
-    if (stack_test == 0)
+    if (stack_test() == 0)
         printf("Stack test passed!\n");
     else
         printf("Stack test failed!\n");
 
-    if (queue_test == 0)
+    if (queue_test() == 0)
         printf("Queue test passed!\n");
     else
         printf("Queue test failed!\n");
