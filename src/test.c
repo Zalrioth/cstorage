@@ -1,7 +1,31 @@
 #include "../include/datastructures/datastructures.h"
 #include <stdio.h>
 
+int vector_test();
+int stack_test();
+int queue_test();
+
 int main(int argc, char* argv[])
+{
+    if (vector_test == 0)
+        printf("Vector test passed!\n");
+    else
+        printf("Vector test failed!\n");
+
+    if (stack_test == 0)
+        printf("Stack test passed!\n");
+    else
+        printf("Stack test failed!\n");
+
+    if (queue_test == 0)
+        printf("Queue test passed!\n");
+    else
+        printf("Queue test failed!\n");
+
+    return 0;
+}
+
+int vector_test()
 {
     // Vector test
     struct Vector vec;
@@ -61,6 +85,11 @@ int main(int argc, char* argv[])
 
     vector_delete(&vec);
 
+    return 0;
+}
+
+int stack_test()
+{
     // Stack test
     struct Stack stack;
 
@@ -110,6 +139,11 @@ int main(int argc, char* argv[])
 
     stack_delete(&stack);
 
+    return 0;
+}
+
+int queue_test()
+{
     // Queue test
     struct Queue queue;
     queue_init(&queue, sizeof(int));
