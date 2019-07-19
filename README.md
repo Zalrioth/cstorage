@@ -6,7 +6,7 @@
 
 ## Settings up a Project
 
-Include the datastructures.h header and you're ready to go.
+Include the datastructures.h header and you're ready to go. Vector is memory aligned and compatible with Vulkan/OpenGL.
 
 ### Implemented
 
@@ -21,9 +21,12 @@ Priority Queue<br/>
 ### Planned
 
 Map<br/>
+Deque<br/>
 Singly Linked List<br/>
 Doubly Linked List<br/>
 Hash Set<br/>
 Hash Table<br/>
 Quadtree<br/>
 Octree<br/>
+Big O Chart<br/>
+Benchmarks<br/>

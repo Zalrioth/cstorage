@@ -110,5 +110,42 @@ int main(int argc, char* argv[])
 
     stack_delete(&stack);
 
+    // Queue test
+    struct Queue queue;
+    queue_init(&queue, sizeof(int));
+
+    int queueNum1 = 10;
+    int queueNum2 = 20;
+    int queueNum3 = 30;
+
+    queue_push(&queue, &queueNum1);
+    queue_push(&queue, &queueNum2);
+    queue_push(&queue, &queueNum3);
+
+    printf("Front of queue: %d\n", *(int*)queue_front(&queue));
+    printf("Back of queue: %d\n", *(int*)queue_back(&queue));
+
+    queue_remove(&queue);
+
+    printf("Front of queue: %d\n", *(int*)queue_front(&queue));
+    printf("Back of queue: %d\n", *(int*)queue_back(&queue));
+
+    queue_remove(&queue);
+
+    printf("Front of queue: %d\n", *(int*)queue_front(&queue));
+    printf("Back of queue: %d\n", *(int*)queue_back(&queue));
+
+    int* popNum = malloc(sizeof(int));
+    queue_pop(&queue, popNum);
+
+    printf("Final popped value: %d\n", *popNum);
+
+    if (queue_size(&queue) == 0)
+        printf("Queue is empty!\n");
+
+    queue_clear(&queue);
+
+    queue_delete(&queue);
+
     return 0;
 }

@@ -11,7 +11,7 @@ struct Stack {
     void* items;
 };
 
-static inline void stack_init(struct Stack* stack, int memory_size)
+static inline void stack_init(struct Stack* stack, unsigned int memory_size)
 {
     stack->top = 0;
     stack->capacity = STACK_INIT_CAPACITY;
@@ -64,7 +64,12 @@ static inline void* stack_pop(struct Stack* stack)
     if (stack_empty(stack))
         return NULL;
 #endif
-    return (char*)stack->items + (stack->memory_size * (--stack->top));
+    stack->top--;
+
+    if (stack->top > 0 && stack->top == stack->capacity / 4)
+        stack_resize(stack, stack->capacity / 2);
+
+    return (char*)stack->items + (stack->memory_size * (stack->top));
 }
 
 //TODO: Check asm here could be optimized probably

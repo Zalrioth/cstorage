@@ -13,7 +13,7 @@ struct Vector {
     void* items; // Pointer to start of data
 };
 
-static inline void vector_init(struct Vector* vector, int memory_size)
+static inline void vector_init(struct Vector* vector, unsigned int memory_size)
 {
     vector->size = 0;
     vector->capacity = VECTOR_INIT_CAPACITY;
@@ -59,6 +59,21 @@ static inline void vector_push_back(struct Vector* vector, void* item)
 
     memcpy((char*)vector->items + (vector->memory_size * vector->size), item, vector->memory_size);
     vector->size++;
+}
+
+// TODO: Add test case
+static inline void vector_pop_back(struct Vector* vector, void* copy_buffer)
+{
+#ifdef BOUNDS_CHECK
+    if (vector->size == 0)
+        return;
+#endif
+    memcpy(copy_buffer, (char*)vector->items + (vector->memory_size * (vector->size - 1)), vector->memory_size);
+
+    vector->size--;
+
+    if (vector->size > 0 && vector->size == vector->capacity / 4)
+        vector_resize(vector, vector->capacity / 2);
 }
 
 static inline void vector_insert(struct Vector* vector, int index, void* item)
