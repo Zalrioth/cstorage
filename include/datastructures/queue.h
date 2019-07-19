@@ -105,6 +105,7 @@ static inline void queue_clear(struct Queue* queue)
 {
     struct QueueNode* temp_node = NULL;
     while (!queue_empty(queue)) {
+        temp_node = queue->head->prev;
         free(queue->head->data);
         free(queue->head);
         queue->head = temp_node;
