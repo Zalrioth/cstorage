@@ -17,16 +17,17 @@ Queue<br/>
 ### In Progress
 
 Priority Queue<br/>
+Singly Linked List<br/>
+Doubly Linked List<br/>
 
 ### Planned
 
 Map<br/>
 Deque<br/>
-Entity Vector<br/>
-Singly Linked List<br/>
-Doubly Linked List<br/>
+Array List<br/>
 Hash Set<br/>
-Hash Table<br/>
+Hash Map<br/>
+Linked Hash Map<br/>
 Quadtree<br/>
 Octree<br/>
 Big O Chart<br/>
