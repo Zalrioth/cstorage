@@ -24,7 +24,6 @@ Doubly Linked List<br/>
 
 Map<br/>
 Deque<br/>
-Array List<br/>
 Hash Set<br/>
 Hash Map<br/>
 Linked Hash Map<br/>
