@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 int vector_test();
-int stack_test();
+//int stack_test();
 int queue_test();
 int array_list_test();
 

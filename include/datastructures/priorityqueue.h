@@ -1,7 +1,8 @@
-/*#pragma once
+#pragma once
 #ifndef PRIORITY_QUEUE_H_
 #define PRIORITY_QUEUE_H_
 
+/* Priority queue in C, Nick Bedner */
 
 struct PriorityQueueNode {
     void* data;
@@ -117,4 +118,4 @@ static inline void queue_clear_free(struct PriorityQueue* priority_queue)
 }
 
 #endif
-*/
+* /
