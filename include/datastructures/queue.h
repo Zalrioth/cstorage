@@ -4,30 +4,25 @@
 
 /* Queue in C, Nick Bedner */
 
-struct QueueNode {
-    void* data;
-    struct QueueNode* prev;
-};
-
 struct Queue {
     unsigned int size;
-    struct QueueNode* head;
-    struct QueueNode* tail;
+    unsigned int capacity;
+    int front;
+    int back;
+    void** items;
 };
 
-static inline void queue_init(struct Queue* queue)
+static inline void queue_init(struct Queue* queue, int capacity)
 {
-    queue->size = 0;
-    queue->head = queue->tail = NULL;
+    queue->size = queue->front = 0;
+    queue->back = -1;
+    queue->capacity = capacity;
+    void** items = malloc(sizeof(void*) * capacity);
 }
 
 static inline void queue_delete(struct Queue* queue)
 {
-    if (queue->head != NULL)
-        free(queue->head);
-
-    if (queue->tail != NULL)
-        free(queue->tail);
+    free(queue->items);
 }
 
 static inline int queue_size(struct Queue* queue)
@@ -40,19 +35,21 @@ static inline int queue_empty(struct Queue* queue)
     return queue->size == 0;
 }
 
+static inline int queue_full(struct Queue* queue)
+{
+    return queue->size == queue->capacity;
+}
+
 static inline void queue_push(struct Queue* queue, void* item)
 {
-    struct QueueNode* new_node = malloc(sizeof(struct QueueNode));
-    new_node->data = item;
+#ifdef BOUNDS_CHECK
+    if (queue->size == queue->capacity)
+        return;
+#endif
+    if (queue->back == queue->capacity - 1)
+        queue->back = -1;
 
-    if (queue_empty(queue)) {
-        queue->head = new_node;
-        queue->tail = new_node;
-    } else {
-        queue->tail->prev = new_node;
-        queue->tail = new_node;
-    }
-
+    queue->items[++queue->back] = item;
     queue->size++;
 }
 
@@ -62,53 +59,38 @@ static inline void* queue_pop(struct Queue* queue)
     if (queue_empty(queue))
         return NULL;
 #endif
+    void* node_data = queue->items[queue->front++];
 
-    struct QueueNode* temp_node = queue->head->prev;
-    void* node_data = queue->head->data;
+    if (queue->front == queue->capacity)
+        queue->front = 0;
 
-    free(queue->head);
-
-    queue->head = temp_node;
     queue->size--;
-
     return node_data;
 }
 
 static inline void* queue_front(struct Queue* queue)
 {
-    return queue->head->data;
+#ifdef BOUNDS_CHECK
+    if (queue_empty(queue))
+        return NULL;
+#endif
+
+    return queue->items[queue->front];
 }
 
 static inline void* queue_back(struct Queue* queue)
 {
-    return queue->tail->data;
+#ifdef BOUNDS_CHECK
+    if (queue_empty(queue))
+        return NULL;
+#endif
+
+    return queue->items[queue->back];
 }
 
 static inline void queue_clear(struct Queue* queue)
 {
-    struct QueueNode* temp_node = NULL;
-    while (!queue_empty(queue)) {
-        temp_node = queue->head->prev;
-        free(queue->head);
-        queue->head = temp_node;
-        queue->size--;
-    }
-
-    queue->head = queue->tail = NULL;
-}
-
-static inline void queue_clear_free(struct Queue* queue)
-{
-    struct QueueNode* temp_node = NULL;
-    while (!queue_empty(queue)) {
-        temp_node = queue->head->prev;
-        free(queue->head->data);
-        free(queue->head);
-        queue->head = temp_node;
-        queue->size--;
-    }
-
-    queue->head = queue->tail = NULL;
+    queue->size = queue->front = queue->back = 0;
 }
 
 #endif

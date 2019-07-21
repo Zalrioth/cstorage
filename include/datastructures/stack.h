@@ -75,7 +75,7 @@ static inline void* stack_peek(struct Stack* stack)
     if (stack_empty(stack))
         return NULL;
 #endif
-    return stack->items[stack->top];
+    return stack->items[stack->top - 1];
 }
 
 static inline void stack_clear(struct Stack* stack)
