@@ -18,10 +18,10 @@ int main(int argc, char* argv[])
     else
         printf("Stack test failed!\n");
 
-    //if (queue_test() == 0)
-    //    printf("Queue test passed!\n");
-    //else
-    //    printf("Queue test failed!\n");
+    if (queue_test() == 0)
+        printf("Queue test passed!\n");
+    else
+        printf("Queue test failed!\n");
 
     if (array_list_test() == 0)
         printf("Array list test passed!\n");

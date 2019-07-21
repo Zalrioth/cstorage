@@ -14,10 +14,10 @@ struct Queue {
 
 static inline void queue_init(struct Queue* queue, int capacity)
 {
-    queue->size = queue->front = 0;
-    queue->back = -1;
     queue->capacity = capacity;
-    void** items = malloc(sizeof(void*) * capacity);
+    queue->size = queue->front = 0;
+    queue->back = (queue->back + 1) % capacity;
+    queue->items = malloc(sizeof(void*) * capacity);
 }
 
 static inline void queue_delete(struct Queue* queue)
@@ -46,9 +46,7 @@ static inline void queue_push(struct Queue* queue, void* item)
     if (queue->size == queue->capacity)
         return;
 #endif
-    if (queue->back == queue->capacity - 1)
-        queue->back = -1;
-
+    queue->back = (queue->back + 1) % queue->capacity;
     queue->items[++queue->back] = item;
     queue->size++;
 }
@@ -59,12 +57,10 @@ static inline void* queue_pop(struct Queue* queue)
     if (queue_empty(queue))
         return NULL;
 #endif
-    void* node_data = queue->items[queue->front++];
-
-    if (queue->front == queue->capacity)
-        queue->front = 0;
-
+    void* node_data = queue->items[queue->front];
+    queue->front = (queue->front + 1) % queue->capacity;
     queue->size--;
+
     return node_data;
 }
 
