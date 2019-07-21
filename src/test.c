@@ -152,7 +152,7 @@ int queue_test()
 {
     // Queue test
     struct Queue queue;
-    queue_init(&queue);
+    queue_init(&queue, 10);
 
     int queueNum1 = 10;
     int queueNum2 = 20;
