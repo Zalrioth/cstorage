@@ -8,25 +8,25 @@ int array_list_test();
 
 int main(int argc, char* argv[])
 {
-    ///if (vector_test() == 0)
-    //    printf("Vector test passed!\n");
-    //else
-    //    printf("Vector test failed!\n");
-
-    //if (stack_test() == 0)
-    //    printf("Stack test passed!\n");
-    //else
-    //    printf("Stack test failed!\n");
-
-    if (queue_test() == 0)
-        printf("Queue test passed!\n");
+    if (vector_test() == 0)
+        printf("Vector test passed!\n");
     else
-        printf("Queue test failed!\n");
+        printf("Vector test failed!\n");
 
-    //if (array_list_test() == 0)
-    //    printf("Array list test passed!\n");
+    if (stack_test() == 0)
+        printf("Stack test passed!\n");
+    else
+        printf("Stack test failed!\n");
+
+    //if (queue_test() == 0)
+    //    printf("Queue test passed!\n");
     //else
-    //    printf("Array list test failed!\n");
+    //    printf("Queue test failed!\n");
+
+    if (array_list_test() == 0)
+        printf("Array list test passed!\n");
+    else
+        printf("Array list test failed!\n");
 
     return 0;
 }
