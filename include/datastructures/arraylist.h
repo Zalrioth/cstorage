@@ -42,7 +42,7 @@ static inline int array_list_empty(struct ArrayList* array_list)
 
 static inline void array_list_resize(struct ArrayList* array_list, int capacity)
 {
-    void* new_items = realloc((char*)array_list->items, sizeof(void*) * capacity);
+    void** new_items = realloc((char*)array_list->items, sizeof(void*) * capacity);
 
     // If realloc fails array list will not be resized
     if (new_items) {

@@ -99,7 +99,7 @@ int stack_test()
     // Stack test
     struct Stack stack;
 
-    stack_init(&stack, sizeof(int));
+    stack_init(&stack);
 
     int val1 = 10;
     int val2 = 20;

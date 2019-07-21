@@ -7,16 +7,14 @@
 struct Stack {
     unsigned int top;
     unsigned int capacity;
-    unsigned int memory_size;
-    void* items;
+    void** items;
 };
 
-static inline void stack_init(struct Stack* stack, unsigned int memory_size)
+static inline void stack_init(struct Stack* stack)
 {
     stack->top = 0;
     stack->capacity = STACK_INIT_CAPACITY;
-    stack->memory_size = memory_size;
-    stack->items = malloc(memory_size * stack->capacity);
+    stack->items = malloc(sizeof(void*) * STACK_INIT_CAPACITY);
 }
 
 static inline void stack_delete(struct Stack* stack)
@@ -41,7 +39,7 @@ static inline int stack_capacity(struct Stack* stack)
 
 static inline void stack_resize(struct Stack* stack, int capacity)
 {
-    void* newItems = realloc((char*)stack->items, stack->memory_size * capacity);
+    void** newItems = realloc((char*)stack->items, sizeof(void*) * capacity);
 
     // If realloc fails stack will not be resized
     if (newItems) {
@@ -55,7 +53,7 @@ static inline void stack_push(struct Stack* stack, void* item)
     if (stack->capacity == stack->top)
         stack_resize(stack, stack->capacity * 2);
 
-    memcpy((char*)stack->items + (stack->memory_size * stack->top++), item, stack->memory_size);
+    stack->items[stack->top++] = item;
 }
 
 static inline void* stack_pop(struct Stack* stack)
@@ -64,12 +62,10 @@ static inline void* stack_pop(struct Stack* stack)
     if (stack_empty(stack))
         return NULL;
 #endif
-    stack->top--;
-
     if (stack->top > 0 && stack->top == stack->capacity / 4)
         stack_resize(stack, stack->capacity / 2);
 
-    return (char*)stack->items + (stack->memory_size * (stack->top));
+    return stack->items[--stack->top];
 }
 
 //TODO: Check asm here could be optimized probably
@@ -79,15 +75,14 @@ static inline void* stack_peek(struct Stack* stack)
     if (stack_empty(stack))
         return NULL;
 #endif
-    return (char*)stack->items + (stack->memory_size * (stack->top - 1));
+    return stack->items[stack->top];
 }
 
 static inline void stack_clear(struct Stack* stack)
 {
     stack->top = 0;
     stack->capacity = STACK_INIT_CAPACITY;
-    free(stack->items);
-    stack->items = malloc(stack->memory_size * stack->capacity);
+    stack_resize(stack, STACK_INIT_CAPACITY);
 }
 
 #endif
