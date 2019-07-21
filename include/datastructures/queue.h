@@ -16,7 +16,7 @@ static inline void queue_init(struct Queue* queue, int capacity)
 {
     queue->capacity = capacity;
     queue->size = queue->front = 0;
-    queue->back = (queue->back + 1) % capacity;
+    queue->back = capacity - 1;
     queue->items = malloc(sizeof(void*) * capacity);
 }
 
