@@ -164,12 +164,12 @@ int queue_test()
     printf("Front of queue: %d\n", *(int*)queue_front(&queue));
     printf("Back of queue: %d\n", *(int*)queue_back(&queue));
 
-    queue_remove(&queue);
+    queue_pop(&queue);
 
     printf("Front of queue: %d\n", *(int*)queue_front(&queue));
     printf("Back of queue: %d\n", *(int*)queue_back(&queue));
 
-    queue_remove(&queue);
+    queue_pop(&queue);
 
     printf("Front of queue: %d\n", *(int*)queue_front(&queue));
     printf("Back of queue: %d\n", *(int*)queue_back(&queue));
