@@ -16,7 +16,7 @@ struct PriorityQueue {
     struct PriorityQueueNode* tail;
 };
 
-static inline void queue_init(struct PriorityQueue* priority_queue)
+/*static inline void queue_init(struct PriorityQueue* priority_queue)
 {
     priority_queue->size = 0;
     priority_queue->head = priority_queue->tail = NULL;
@@ -115,7 +115,6 @@ static inline void queue_clear_free(struct PriorityQueue* priority_queue)
     }
 
     priority_queue->head = priority_queue->tail = NULL;
-}
+}*/
 
 #endif
-* /
