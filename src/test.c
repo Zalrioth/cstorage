@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 int vector_test();
-//int stack_test();
+int stack_test();
 int queue_test();
 int array_list_test();
 
@@ -13,10 +13,10 @@ int main(int argc, char* argv[])
     else
         printf("Vector test failed!\n");
 
-    if (stack_test() == 0)
-        printf("Stack test passed!\n");
-    else
-        printf("Stack test failed!\n");
+    //if (stack_test() == 0)
+    //    printf("Stack test passed!\n");
+    //else
+    //    printf("Stack test failed!\n");
 
     if (queue_test() == 0)
         printf("Queue test passed!\n");
