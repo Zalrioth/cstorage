@@ -8,7 +8,7 @@ int array_list_test();
 
 int main(int argc, char* argv[])
 {
-    //if (vector_test() == 0)
+    ///if (vector_test() == 0)
     //    printf("Vector test passed!\n");
     //else
     //    printf("Vector test failed!\n");
