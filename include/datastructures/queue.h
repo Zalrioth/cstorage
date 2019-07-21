@@ -47,7 +47,7 @@ static inline void queue_push(struct Queue* queue, void* item)
         return;
 #endif
     queue->back = (queue->back + 1) % queue->capacity;
-    queue->items[++queue->back] = item;
+    queue->items[queue->back] = item;
     queue->size++;
 }
 
@@ -57,11 +57,11 @@ static inline void* queue_pop(struct Queue* queue)
     if (queue_empty(queue))
         return NULL;
 #endif
-    void* node_data = queue->items[queue->front];
+    void* item_data = queue->items[queue->front];
     queue->front = (queue->front + 1) % queue->capacity;
     queue->size--;
 
-    return node_data;
+    return item_data;
 }
 
 static inline void* queue_front(struct Queue* queue)
