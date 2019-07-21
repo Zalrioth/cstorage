@@ -3,6 +3,7 @@
 
 #define BOUNDS_CHECK
 
+#include "arraylist.h"
 #include "priorityqueue.h"
 #include "queue.h"
 #include "stack.h"

@@ -5,6 +5,7 @@
 /* Memory aligned vector in C, Nick Bedner */
 
 #define VECTOR_INIT_CAPACITY 4
+#define VECTOR_RESIZE_FACTOR 2
 
 struct Vector {
     unsigned int size; // Number of items currently in vector
@@ -18,7 +19,7 @@ static inline void vector_init(struct Vector* vector, unsigned int memory_size)
     vector->size = 0;
     vector->capacity = VECTOR_INIT_CAPACITY;
     vector->memory_size = memory_size;
-    vector->items = malloc(memory_size * vector->capacity);
+    vector->items = malloc(memory_size * VECTOR_INIT_CAPACITY);
 }
 
 static inline void vector_delete(struct Vector* vector)
@@ -43,11 +44,11 @@ static inline int vector_empty(struct Vector* vector)
 
 static inline void vector_resize(struct Vector* vector, int capacity)
 {
-    void* newItems = realloc((char*)vector->items, vector->memory_size * capacity);
+    void* new_items = realloc((char*)vector->items, vector->memory_size * capacity);
 
     // If realloc fails vector will not be resized
-    if (newItems) {
-        vector->items = newItems;
+    if (new_items) {
+        vector->items = new_items;
         vector->capacity = capacity;
     }
 }
@@ -55,7 +56,7 @@ static inline void vector_resize(struct Vector* vector, int capacity)
 static inline void vector_push_back(struct Vector* vector, void* item)
 {
     if (vector->capacity == vector->size)
-        vector_resize(vector, vector->capacity * 2);
+        vector_resize(vector, vector->capacity * VECTOR_RESIZE_FACTOR);
 
     memcpy((char*)vector->items + (vector->memory_size * vector->size), item, vector->memory_size);
     vector->size++;
@@ -83,7 +84,7 @@ static inline void vector_insert(struct Vector* vector, int index, void* item)
         return;
 #endif
     if (vector->capacity == vector->size)
-        vector_resize(vector, vector->capacity * 2);
+        vector_resize(vector, vector->capacity * VECTOR_RESIZE_FACTOR);
 
     memmove((char*)vector->items + (vector->memory_size * (index + 1)), (char*)vector->items + (vector->memory_size * index), vector->memory_size * (vector->size - (index + 1) + 1));
     memcpy((char*)vector->items + (vector->memory_size * index), item, vector->memory_size);
@@ -132,12 +133,14 @@ static inline void vector_remove(struct Vector* vector, int index)
         vector_resize(vector, vector->capacity / 2);
 }
 
+// TODO: More testing needed of performance of realloc vs. free/malloc
 static inline void vector_clear(struct Vector* vector)
 {
     vector->size = 0;
     vector->capacity = VECTOR_INIT_CAPACITY;
-    free(vector->items);
-    vector->items = malloc(vector->memory_size * vector->capacity);
+    vector_resize(vector, VECTOR_INIT_CAPACITY);
+    //free(vector->items);
+    //vector->items = malloc(vector->memory_size * vector->capacity);
 }
 
 #endif

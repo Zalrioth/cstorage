@@ -10,9 +10,10 @@ Include the datastructures.h header and you're ready to go. Vector is memory ali
 
 ### Implemented
 
-Vector<br/>
-Stack<br/>
+Array List<br/>
 Queue<br/>
+Stack<br/>
+Vector<br/>
 
 ### In Progress
 

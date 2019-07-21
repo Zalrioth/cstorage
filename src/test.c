@@ -22,6 +22,11 @@ int main(int argc, char* argv[])
     else
         printf("Queue test failed!\n");
 
+    if (array_list_test() == 0)
+        printf("Array list test passed!\n");
+    else
+        printf("Array list test failed!\n");
+
     return 0;
 }
 
@@ -180,6 +185,53 @@ int queue_test()
     queue_clear(&queue);
 
     queue_delete(&queue);
+
+    return 0;
+}
+
+int array_list_test()
+{
+    // Array list test
+    struct ArrayList array_list;
+
+    array_list_init(&array_list);
+
+    // Memory freed after function is left
+    int num1 = 10;
+    array_list_add(&array_list, &num1);
+
+    printf("Current size of array list: %d\n", array_list_size(&array_list));
+    printf("Last value in array list: %d\n", *(int*)array_list_get(&array_list, array_list_size(&array_list) - 1));
+
+    // Must call free manually
+    int* num2 = malloc(sizeof(int));
+    *num2 = 20;
+    array_list_add(&array_list, num2);
+
+    printf("Current size of array list: %d\n", array_list_size(&array_list));
+    printf("Last value in array list: %d\n", *(int*)array_list_get(&array_list, array_list_size(&array_list) - 1));
+
+    int num3 = 30;
+    array_list_insert(&array_list, 0, &num3);
+
+    printf("Current size of array list: %d\n", array_list_size(&array_list));
+    printf("Last value in array list: %d\n", *(int*)array_list_get(&array_list, array_list_size(&array_list) - 1));
+    printf("First value in array list: %d\n", *(int*)array_list_get(&array_list, 0));
+
+    array_list_set(&array_list, array_list_size(&array_list) - 1, &num3);
+
+    printf("Last value in array list: %d\n", *(int*)array_list_get(&array_list, array_list_size(&array_list) - 1));
+    printf("First value in array list: %d\n", *(int*)array_list_get(&array_list, 0));
+
+    num3 = 15;
+
+    printf("Last value in array list: %d\n", *(int*)array_list_get(&array_list, array_list_size(&array_list) - 1));
+    printf("First value in array list: %d\n", *(int*)array_list_get(&array_list, 0));
+
+    free(num2);
+
+    array_list_clear(&array_list);
+    array_list_delete(&array_list);
 
     return 0;
 }
