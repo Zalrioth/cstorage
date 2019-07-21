@@ -86,7 +86,8 @@ static inline void* queue_back(struct Queue* queue)
 
 static inline void queue_clear(struct Queue* queue)
 {
-    queue->size = queue->front = queue->back = 0;
+    queue->size = queue->front = 0;
+    queue->back = queue->capacity - 1;
 }
 
 #endif
