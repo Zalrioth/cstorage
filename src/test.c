@@ -4,6 +4,7 @@
 int vector_test();
 int stack_test();
 int queue_test();
+int array_list_test();
 
 int main(int argc, char* argv[])
 {
@@ -151,7 +152,7 @@ int queue_test()
 {
     // Queue test
     struct Queue queue;
-    queue_init(&queue, sizeof(int));
+    queue_init(&queue);
 
     int queueNum1 = 10;
     int queueNum2 = 20;
@@ -174,10 +175,7 @@ int queue_test()
     printf("Front of queue: %d\n", *(int*)queue_front(&queue));
     printf("Back of queue: %d\n", *(int*)queue_back(&queue));
 
-    int* popNum = malloc(sizeof(int));
-    queue_pop(&queue, popNum);
-
-    printf("Final popped value: %d\n", *popNum);
+    printf("Final popped value: %d\n", *(int*)queue_pop(&queue));
 
     if (queue_empty(&queue))
         printf("Queue is empty!\n");
