@@ -12,12 +12,12 @@ Include the datastructures.h header and you're ready to go. Vector is memory ali
 
 Array List<br/>
 Queue<br/>
+Priority Queue<br/>
 Stack<br/>
 Vector<br/>
 
 ### In Progress
 
-Priority Queue<br/>
 Singly Linked List<br/>
 Doubly Linked List<br/>
 

@@ -5,28 +5,24 @@ int vector_test();
 int stack_test();
 int queue_test();
 int array_list_test();
+int priority_queue_test();
 
 int main(int argc, char* argv[])
 {
     if (vector_test() == 0)
         printf("Vector test passed!\n");
-    else
-        printf("Vector test failed!\n");
 
     if (stack_test() == 0)
         printf("Stack test passed!\n");
-    else
-        printf("Stack test failed!\n");
 
     if (queue_test() == 0)
         printf("Queue test passed!\n");
-    else
-        printf("Queue test failed!\n");
 
     if (array_list_test() == 0)
         printf("Array list test passed!\n");
-    else
-        printf("Array list test failed!\n");
+
+    if (priority_queue_test() == 0)
+        printf("Priority queue test passed!\n");
 
     return 0;
 }
@@ -230,6 +226,47 @@ int array_list_test()
 
     array_list_clear(&array_list);
     array_list_delete(&array_list);
+
+    return 0;
+}
+
+int priority_queue_test()
+{
+    struct PriorityQueue priority_queue;
+
+    priority_queue_init(&priority_queue);
+
+    int num1 = 10;
+    priority_queue_push(&priority_queue, &num1, 20);
+
+    int num2 = 20;
+    priority_queue_push(&priority_queue, &num2, 10);
+
+    int num3 = 30;
+    priority_queue_push(&priority_queue, &num3, 30);
+
+    printf("Current size of priority queue: %d\n", priority_queue_size(&priority_queue));
+    printf("Front of priority queue: %d\n", *(int*)priority_queue_front(&priority_queue));
+
+    priority_queue_pop(&priority_queue);
+
+    printf("Current size of priority queue: %d\n", priority_queue_size(&priority_queue));
+    printf("Front of priority queue: %d\n", *(int*)priority_queue_front(&priority_queue));
+
+    priority_queue_pop(&priority_queue);
+
+    printf("Current size of priority queue: %d\n", priority_queue_size(&priority_queue));
+    printf("Front of priority queue: %d\n", *(int*)priority_queue_front(&priority_queue));
+
+    priority_queue_pop(&priority_queue);
+
+    printf("Current size of priority queue: %d\n", priority_queue_size(&priority_queue));
+
+    if (priority_queue_empty(&priority_queue))
+        printf("Queue is empty!\n");
+
+    priority_queue_clear(&priority_queue);
+    priority_queue_delete(&priority_queue);
 
     return 0;
 }
