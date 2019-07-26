@@ -4,17 +4,19 @@
 
 /* Memory aligned vector in C, Nick Bedner */
 
+// TODO: Move
+
 #define VECTOR_INIT_CAPACITY 4
 #define VECTOR_RESIZE_FACTOR 2
 
 struct Vector {
-    unsigned int size; // Number of items currently in vector
-    unsigned int capacity; // Total size of vector currently allocated in memory
-    unsigned int memory_size; // How much memory each vector item takes
+    size_t size; // Number of items currently in vector
+    size_t capacity; // Total size of vector currently allocated in memory
+    size_t memory_size; // How much memory each vector item takes
     void* items; // Pointer to start of data
 };
 
-static inline void vector_init(struct Vector* vector, unsigned int memory_size)
+static inline void vector_init(struct Vector* vector, size_t memory_size)
 {
     vector->size = 0;
     vector->capacity = VECTOR_INIT_CAPACITY;
@@ -27,12 +29,12 @@ static inline void vector_delete(struct Vector* vector)
     free(vector->items);
 }
 
-static inline int vector_size(struct Vector* vector)
+static inline size_t vector_size(struct Vector* vector)
 {
     return vector->size;
 }
 
-static inline int vector_capactiy(struct Vector* vector)
+static inline size_t vector_capactiy(struct Vector* vector)
 {
     return vector->capacity;
 }
@@ -42,7 +44,7 @@ static inline int vector_empty(struct Vector* vector)
     return vector->size == 0;
 }
 
-static inline void vector_resize(struct Vector* vector, int capacity)
+static inline void vector_resize(struct Vector* vector, size_t capacity)
 {
     void* new_items = realloc((char*)vector->items, vector->memory_size * capacity);
 
@@ -77,7 +79,7 @@ static inline void vector_pop_back(struct Vector* vector, void* copy_buffer)
         vector_resize(vector, vector->capacity / 2);
 }
 
-static inline void vector_insert(struct Vector* vector, int index, void* item)
+static inline void vector_insert(struct Vector* vector, size_t index, void* item)
 {
 #ifdef BOUNDS_CHECK
     if (index < 0 || index >= vector->size)
@@ -92,7 +94,7 @@ static inline void vector_insert(struct Vector* vector, int index, void* item)
     vector->size++;
 }
 
-static inline void vector_set(struct Vector* vector, int index, void* item)
+static inline void vector_set(struct Vector* vector, size_t index, void* item)
 {
 #ifdef BOUNDS_CHECK
     if (index >= 0 && index < vector->size)
@@ -102,7 +104,7 @@ static inline void vector_set(struct Vector* vector, int index, void* item)
 #endif
 }
 
-static inline void* vector_get(struct Vector* vector, int index)
+static inline void* vector_get(struct Vector* vector, size_t index)
 {
 #ifdef BOUNDS_CHECK
     if (index >= 0 && index < vector->size)
@@ -114,12 +116,12 @@ static inline void* vector_get(struct Vector* vector, int index)
 #endif
 }
 
-static inline int vector_exists(struct Vector* vector, int index)
+static inline int vector_exists(struct Vector* vector, size_t index)
 {
     return index >= 0 && index < vector->size;
 }
 
-static inline void vector_remove(struct Vector* vector, int index)
+static inline void vector_remove(struct Vector* vector, size_t index)
 {
 #ifdef BOUNDS_CHECK
     if (index < 0 || index >= vector->size)

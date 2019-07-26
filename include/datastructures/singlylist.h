@@ -1,113 +1,149 @@
-/*/#pragma once
+#pragma once
 #ifndef QUEUE_H_
 #define QUEUE_H_
 
-struct QueueNode {
+/* Singly linked list in C, Nick Bedner */
+
+struct SinglyListNode {
     void* data;
-    struct QueueNode* prev;
+    struct SinglyListNode* next;
 };
 
-struct Queue {
-    unsigned int size;
-    struct QueueNode* head;
-    struct QueueNode* tail;
+struct SinglyList {
+    size_t size;
+    struct SinglyListNode* head;
 };
 
-static inline void queue_init(struct Queue* queue)
+static inline void singly_list_init(struct SinglyList* singly_list)
 {
-    queue->size = 0;
-    queue->head = queue->tail = NULL;
+    singly_list->size = 0;
+    singly_list->head = NULL;
 }
 
-static inline void queue_delete(struct Queue* queue)
+static inline void singly_list_delete(struct SinglyList* singly_list)
 {
-    if (queue->head != NULL)
-        free(queue->head);
-
-    if (queue->tail != NULL)
-        free(queue->tail);
+    if (singly_list->head != NULL)
+        free(singly_list->head);
 }
 
-static inline int queue_size(struct Queue* queue)
+static inline size_t singly_list_size(struct SinglyList* singly_list)
 {
-    return queue->size;
+    return singly_list->size;
 }
 
-static inline int queue_empty(struct Queue* queue)
+static inline int singly_list_empty(struct SinglyList* singly_list)
 {
-    return queue->size == 0;
+    return singly_list->size == 0;
 }
 
-static inline void queue_push(struct Queue* queue, void* item)
+static inline void singly_list_add(struct SinglyList* singly_list, void* item)
 {
-    struct QueueNode* new_node = malloc(sizeof(struct QueueNode));
+    struct SinglyListNode* new_node = malloc(sizeof(struct SinglyListNode));
     new_node->data = item;
 
-    if (queue_empty(queue)) {
-        queue->head = new_node;
-        queue->tail = new_node;
-    } else {
-        queue->tail->prev = new_node;
-        queue->tail = new_node;
+    if (singly_list_empty(singly_list))
+        singly_list->head = new_node;
+    else {
+        struct SinglyListNode* iterate_node = single_list->head;
+        while (iterate_node->next != NULL)
+            iterate_node = iterate_node->next;
+
+        iterate_node->next = new_node;
     }
 
-    queue->size++;
+    singly_list->size++;
 }
 
-static inline void* queue_pop(struct Queue* queue)
+static inline void singly_list_remove(struct SinglyList* singly_list, void* item)
 {
 #ifdef BOUNDS_CHECK
-    if (queue_empty(queue))
+    if (singly_list_empty(singly_list))
+        return;
+#endif
+    struct SinglyListNode* iterate_node = single_list->head;
+    while (iterate_node->next != NULL && iterate_node->next->data != item)
+        iterate_node = iterate_node->next;
+
+    iterate_node->next = new_node;
+
+    singly_list->size--;
+}
+
+static inline void singly_list_remove_index(struct SinglyList* singly_list, size_t index)
+{
+#ifdef BOUNDS_CHECK
+    if (singly_list_empty(singly_list))
+        return;
+#endif
+    struct SinglyListNode* iterate_node = single_list->head;
+    struct SinglyListNode* prev_node = NULL;
+    for (size_t iterate_num = 0; iterate_num < index; iterate_num++) {
+#ifdef BOUNDS_CHECK
+        if (iterate_node == NULL)
+            return;
+#endif
+        prev_node = iterate_node;
+        iterate_node = iterate_node->next;
+    }
+
+    iterate_node->next = new_node;
+
+    singly_list->size--;
+}
+
+static inline void* singly_list_get(struct SinglyList* singly_list)
+{
+#ifdef BOUNDS_CHECK
+    if (singly_list_empty(singly_list))
         return NULL;
 #endif
 
-    struct QueueNode* temp_node = queue->head->prev;
-    void* node_data = queue->head->data;
+    struct SinglyListNode* temp_node = singly_list->head->next;
+    void* node_data = singly_list->head->data;
 
-    free(queue->head);
+    free(singly_list->head);
 
-    queue->head = temp_node;
-    queue->size--;
+    singly_list->head = temp_node;
+    singly_list->size--;
 
     return node_data;
 }
 
-static inline void* queue_front(struct Queue* queue)
+static inline void* singly_list_front(struct SinglyList* singly_list)
 {
-    return queue->head->data;
+    return singly_list->head->data;
 }
 
-static inline void* queue_back(struct Queue* queue)
+static inline void* singly_list_back(struct SinglyList* singly_list)
 {
-    return queue->tail->data;
+    return singly_list->tail->data;
 }
 
-static inline void queue_clear(struct Queue* queue)
+static inline void singly_list_clear(struct SinglyList* singly_list)
 {
-    struct QueueNode* temp_node = NULL;
-    while (!queue_empty(queue)) {
-        temp_node = queue->head->prev;
-        free(queue->head);
-        queue->head = temp_node;
-        queue->size--;
+    struct SinglyListNode* temp_node = NULL;
+    while (!singly_list_empty(singly_list)) {
+        temp_node = singly_list->head->next;
+        free(singly_list->head);
+        singly_list->head = temp_node;
+        singly_list->size--;
     }
 
-    queue->head = queue->tail = NULL;
+    singly_list->head = singly_list->tail = NULL;
 }
 
-static inline void queue_clear_free(struct Queue* queue)
+static inline void singly_list_clear_free(struct SinglyList* singly_list)
 {
-    struct QueueNode* temp_node = NULL;
-    while (!queue_empty(queue)) {
-        temp_node = queue->head->prev;
-        free(queue->head->data);
-        free(queue->head);
-        queue->head = temp_node;
-        queue->size--;
+    struct SinglyListNode* temp_node = NULL;
+    while (!singly_list_empty(singly_list)) {
+        temp_node = singly_list->head->next;
+        free(singly_list->head->data);
+        free(singly_list->head);
+        singly_list->head = temp_node;
+        singly_list->size--;
     }
 
-    queue->head = queue->tail = NULL;
+    singly_list->head = singly_list->tail = NULL;
 }
 
 #endif
-*/

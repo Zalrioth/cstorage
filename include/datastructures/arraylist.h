@@ -8,8 +8,8 @@
 #define ARRAY_LIST_RESIZE_FACTOR 0.5
 
 struct ArrayList {
-    unsigned int size; // Number of items currently in array list
-    unsigned int capacity; // Total size of array list currently allocated in memory
+    size_t size; // Number of items currently in array list
+    size_t capacity; // Total size of array list currently allocated in memory
     void** items; // Pointer to start of data
 };
 
@@ -40,7 +40,7 @@ static inline int array_list_empty(struct ArrayList* array_list)
     return array_list->size == 0;
 }
 
-static inline void array_list_resize(struct ArrayList* array_list, int capacity)
+static inline void array_list_resize(struct ArrayList* array_list, size_t capacity)
 {
     void** new_items = realloc((char*)array_list->items, sizeof(void*) * capacity);
 
@@ -71,7 +71,7 @@ static inline void* array_list_pop_back(struct ArrayList* array_list)
     return array_list->items[--array_list->size];
 }
 
-static inline void array_list_insert(struct ArrayList* array_list, int index, void* item)
+static inline void array_list_insert(struct ArrayList* array_list, size_t index, void* item)
 {
 #ifdef BOUNDS_CHECK
     if (index < 0 || index >= array_list->size)
@@ -85,7 +85,7 @@ static inline void array_list_insert(struct ArrayList* array_list, int index, vo
     array_list->size++;
 }
 
-static inline void array_list_set(struct ArrayList* array_list, int index, void* item)
+static inline void array_list_set(struct ArrayList* array_list, size_t index, void* item)
 {
 #ifdef BOUNDS_CHECK
     if (index >= 0 && index < array_list->size)
@@ -95,7 +95,7 @@ static inline void array_list_set(struct ArrayList* array_list, int index, void*
 #endif
 }
 
-static inline void* array_list_get(struct ArrayList* array_list, int index)
+static inline void* array_list_get(struct ArrayList* array_list, size_t index)
 {
 #ifdef BOUNDS_CHECK
     if (index >= 0 && index < array_list->size)
@@ -107,12 +107,12 @@ static inline void* array_list_get(struct ArrayList* array_list, int index)
 #endif
 }
 
-static inline int array_list_exists(struct ArrayList* array_list, int index)
+static inline int array_list_exists(struct ArrayList* array_list, size_t index)
 {
     return index >= 0 && index < array_list->size;
 }
 
-static inline void array_list_remove(struct ArrayList* array_list, int index)
+static inline void array_list_remove(struct ArrayList* array_list, size_t index)
 {
 #ifdef BOUNDS_CHECK
     if (index < 0 || index >= array_list->size)
@@ -135,7 +135,7 @@ static inline void array_list_clear(struct ArrayList* array_list)
 
 static inline void array_list_clear_free(struct ArrayList* array_list)
 {
-    for (unsigned int iterate_num = 0; iterate_num < array_list->size; iterate_num++)
+    for (size_t iterate_num = 0; iterate_num < array_list->size; iterate_num++)
         free(array_list->items[iterate_num]);
 
     array_list->size = 0;

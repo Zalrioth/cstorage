@@ -5,14 +5,14 @@
 /* Queue in C, Nick Bedner */
 
 struct Queue {
-    unsigned int size;
-    unsigned int capacity;
+    size_t size;
+    size_t capacity;
     int front;
     int back;
     void** items;
 };
 
-static inline void queue_init(struct Queue* queue, int capacity)
+static inline void queue_init(struct Queue* queue, size_t capacity)
 {
     queue->capacity = capacity;
     queue->size = queue->front = 0;
@@ -25,7 +25,7 @@ static inline void queue_delete(struct Queue* queue)
     free(queue->items);
 }
 
-static inline int queue_size(struct Queue* queue)
+static inline size_t queue_size(struct Queue* queue)
 {
     return queue->size;
 }

@@ -5,8 +5,8 @@
 #define STACK_INIT_CAPACITY 4
 
 struct Stack {
-    unsigned int top;
-    unsigned int capacity;
+    size_t top;
+    size_t capacity;
     void** items;
 };
 
@@ -32,12 +32,12 @@ static inline int stack_size(struct Stack* stack)
     return stack->top;
 }
 
-static inline int stack_capacity(struct Stack* stack)
+static inline size_t stack_capacity(struct Stack* stack)
 {
     return stack->capacity;
 }
 
-static inline void stack_resize(struct Stack* stack, int capacity)
+static inline void stack_resize(struct Stack* stack, size_t capacity)
 {
     void** newItems = realloc((char*)stack->items, sizeof(void*) * capacity);
 
