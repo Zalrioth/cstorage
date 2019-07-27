@@ -7,7 +7,7 @@ int queue_test();
 int array_list_test();
 int priority_queue_test();
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
     if (vector_test() == 0)
         printf("Vector test passed!\n");
@@ -29,7 +29,6 @@ int main(int argc, char* argv[])
 
 int vector_test()
 {
-    // Vector test
     struct Vector vec;
     vector_init(&vec, sizeof(int));
 
@@ -40,7 +39,7 @@ int vector_test()
     vector_push_back(&vec, &testNum1);
     vector_push_back(&vec, &testNum1);
 
-    printf("Num: %d\n", *(int*)vector_get(&vec, 3));
+    printf("Num: %d\n", *(int *)vector_get(&vec, 3));
 
     printf("Total: %d\n", vector_size(&vec));
     printf("Size: %d\n", vector_size(&vec));
@@ -63,7 +62,7 @@ int vector_test()
 
     vector_insert(&vec, 1, &testNum2);
 
-    printf("Num: %d\n", *(int*)vector_get(&vec, 1));
+    printf("Num: %d\n", *(int *)vector_get(&vec, 1));
     printf("Total: %d\n", vector_size(&vec));
     printf("Size: %d\n", vector_size(&vec));
 
@@ -81,7 +80,7 @@ int vector_test()
     vector_push_back(&vec, &testNum1);
     vector_push_back(&vec, &testNum2);
 
-    printf("Num: %d\n", *(int*)vector_get(&vec, 1));
+    printf("Num: %d\n", *(int *)vector_get(&vec, 1));
     printf("Total: %d\n", vector_size(&vec));
     printf("Size: %d\n", vector_size(&vec));
 
@@ -92,7 +91,6 @@ int vector_test()
 
 int stack_test()
 {
-    // Stack test
     struct Stack stack;
 
     stack_init(&stack);
@@ -105,19 +103,19 @@ int stack_test()
     stack_push(&stack, &val2);
     stack_push(&stack, &val3);
 
-    printf("%d peeked on stack!\n", *(int*)stack_peek(&stack));
-    printf("%d popped from stack!\n", *(int*)stack_pop(&stack));
-    printf("%d peeked from stack!\n", *(int*)stack_peek(&stack));
+    printf("%d peeked on stack!\n", *(int *)stack_peek(&stack));
+    printf("%d popped from stack!\n", *(int *)stack_pop(&stack));
+    printf("%d peeked from stack!\n", *(int *)stack_peek(&stack));
 
     stack_push(&stack, &val1);
     stack_push(&stack, &val2);
     stack_push(&stack, &val3);
 
-    printf("%d popped from stack!\n", *(int*)stack_pop(&stack));
-    printf("%d popped from stack!\n", *(int*)stack_pop(&stack));
-    printf("%d popped from stack!\n", *(int*)stack_pop(&stack));
-    printf("%d popped from stack!\n", *(int*)stack_pop(&stack));
-    printf("%d popped from stack!\n", *(int*)stack_pop(&stack));
+    printf("%d popped from stack!\n", *(int *)stack_pop(&stack));
+    printf("%d popped from stack!\n", *(int *)stack_pop(&stack));
+    printf("%d popped from stack!\n", *(int *)stack_pop(&stack));
+    printf("%d popped from stack!\n", *(int *)stack_pop(&stack));
+    printf("%d popped from stack!\n", *(int *)stack_pop(&stack));
 
     if (stack_pop(&stack) == NULL)
         printf("Stack empty!\n");
@@ -134,9 +132,9 @@ int stack_test()
     stack_push(&stack, &val2);
     stack_push(&stack, &val3);
 
-    printf("%d popped from stack!\n", *(int*)stack_pop(&stack));
+    printf("%d popped from stack!\n", *(int *)stack_pop(&stack));
     printf("Size: %d\n", stack_size(&stack));
-    printf("%d popped from stack!\n", *(int*)stack_pop(&stack));
+    printf("%d popped from stack!\n", *(int *)stack_pop(&stack));
     printf("Size: %d\n", stack_size(&stack));
 
     stack_delete(&stack);
@@ -146,7 +144,6 @@ int stack_test()
 
 int queue_test()
 {
-    // Queue test
     struct Queue queue;
     queue_init(&queue, 10);
 
@@ -158,20 +155,20 @@ int queue_test()
     queue_push(&queue, &queueNum2);
     queue_push(&queue, &queueNum3);
 
-    printf("Front of queue: %d\n", *(int*)queue_front(&queue));
-    printf("Back of queue: %d\n", *(int*)queue_back(&queue));
+    printf("Front of queue: %d\n", *(int *)queue_front(&queue));
+    printf("Back of queue: %d\n", *(int *)queue_back(&queue));
 
     queue_pop(&queue);
 
-    printf("Front of queue: %d\n", *(int*)queue_front(&queue));
-    printf("Back of queue: %d\n", *(int*)queue_back(&queue));
+    printf("Front of queue: %d\n", *(int *)queue_front(&queue));
+    printf("Back of queue: %d\n", *(int *)queue_back(&queue));
 
     queue_pop(&queue);
 
-    printf("Front of queue: %d\n", *(int*)queue_front(&queue));
-    printf("Back of queue: %d\n", *(int*)queue_back(&queue));
+    printf("Front of queue: %d\n", *(int *)queue_front(&queue));
+    printf("Back of queue: %d\n", *(int *)queue_back(&queue));
 
-    printf("Final popped value: %d\n", *(int*)queue_pop(&queue));
+    printf("Final popped value: %d\n", *(int *)queue_pop(&queue));
 
     if (queue_empty(&queue))
         printf("Queue is empty!\n");
@@ -185,7 +182,6 @@ int queue_test()
 
 int array_list_test()
 {
-    // Array list test
     struct ArrayList array_list;
 
     array_list_init(&array_list);
@@ -195,32 +191,32 @@ int array_list_test()
     array_list_add(&array_list, &num1);
 
     printf("Current size of array list: %d\n", array_list_size(&array_list));
-    printf("Last value in array list: %d\n", *(int*)array_list_get(&array_list, array_list_size(&array_list) - 1));
+    printf("Last value in array list: %d\n", *(int *)array_list_get(&array_list, array_list_size(&array_list) - 1));
 
     // Must call free manually
-    int* num2 = malloc(sizeof(int));
+    int *num2 = malloc(sizeof(int));
     *num2 = 20;
     array_list_add(&array_list, num2);
 
     printf("Current size of array list: %d\n", array_list_size(&array_list));
-    printf("Last value in array list: %d\n", *(int*)array_list_get(&array_list, array_list_size(&array_list) - 1));
+    printf("Last value in array list: %d\n", *(int *)array_list_get(&array_list, array_list_size(&array_list) - 1));
 
     int num3 = 30;
     array_list_insert(&array_list, 0, &num3);
 
     printf("Current size of array list: %d\n", array_list_size(&array_list));
-    printf("Last value in array list: %d\n", *(int*)array_list_get(&array_list, array_list_size(&array_list) - 1));
-    printf("First value in array list: %d\n", *(int*)array_list_get(&array_list, 0));
+    printf("Last value in array list: %d\n", *(int *)array_list_get(&array_list, array_list_size(&array_list) - 1));
+    printf("First value in array list: %d\n", *(int *)array_list_get(&array_list, 0));
 
     array_list_set(&array_list, array_list_size(&array_list) - 1, &num3);
 
-    printf("Last value in array list: %d\n", *(int*)array_list_get(&array_list, array_list_size(&array_list) - 1));
-    printf("First value in array list: %d\n", *(int*)array_list_get(&array_list, 0));
+    printf("Last value in array list: %d\n", *(int *)array_list_get(&array_list, array_list_size(&array_list) - 1));
+    printf("First value in array list: %d\n", *(int *)array_list_get(&array_list, 0));
 
     num3 = 15;
 
-    printf("Last value in array list: %d\n", *(int*)array_list_get(&array_list, array_list_size(&array_list) - 1));
-    printf("First value in array list: %d\n", *(int*)array_list_get(&array_list, 0));
+    printf("Last value in array list: %d\n", *(int *)array_list_get(&array_list, array_list_size(&array_list) - 1));
+    printf("First value in array list: %d\n", *(int *)array_list_get(&array_list, 0));
 
     free(num2);
 
@@ -246,17 +242,17 @@ int priority_queue_test()
     priority_queue_push(&priority_queue, &num3, 30);
 
     printf("Current size of priority queue: %d\n", priority_queue_size(&priority_queue));
-    printf("Front of priority queue: %d\n", *(int*)priority_queue_front(&priority_queue));
+    printf("Front of priority queue: %d\n", *(int *)priority_queue_front(&priority_queue));
 
     priority_queue_pop(&priority_queue);
 
     printf("Current size of priority queue: %d\n", priority_queue_size(&priority_queue));
-    printf("Front of priority queue: %d\n", *(int*)priority_queue_front(&priority_queue));
+    printf("Front of priority queue: %d\n", *(int *)priority_queue_front(&priority_queue));
 
     priority_queue_pop(&priority_queue);
 
     printf("Current size of priority queue: %d\n", priority_queue_size(&priority_queue));
-    printf("Front of priority queue: %d\n", *(int*)priority_queue_front(&priority_queue));
+    printf("Front of priority queue: %d\n", *(int *)priority_queue_front(&priority_queue));
 
     priority_queue_pop(&priority_queue);
 
