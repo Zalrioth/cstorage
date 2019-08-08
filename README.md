@@ -20,6 +20,7 @@ Vector<br/>
 
 Singly Linked List<br/>
 Doubly Linked List<br/>
+Octree<br/>
 
 ### Planned
 
@@ -29,6 +30,5 @@ Hash Set<br/>
 Hash Map<br/>
 Linked Hash Map<br/>
 Quadtree<br/>
-Octree<br/>
 Big O Chart<br/>
 Benchmarks<br/>

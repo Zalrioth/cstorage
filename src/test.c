@@ -6,6 +6,7 @@ int stack_test();
 int queue_test();
 int array_list_test();
 int priority_queue_test();
+int octree_test();
 
 int main(int argc, char *argv[])
 {
@@ -23,6 +24,9 @@ int main(int argc, char *argv[])
 
     if (priority_queue_test() == 0)
         printf("Priority queue test passed!\n");
+
+    if (octree_test() == 0)
+        printf("Octree test passed!\n");
 
     return 0;
 }
@@ -92,7 +96,6 @@ int vector_test()
 int stack_test()
 {
     struct Stack stack;
-
     stack_init(&stack);
 
     int val1 = 10;
@@ -183,7 +186,6 @@ int queue_test()
 int array_list_test()
 {
     struct ArrayList array_list;
-
     array_list_init(&array_list);
 
     // Memory freed after function is left
@@ -229,7 +231,6 @@ int array_list_test()
 int priority_queue_test()
 {
     struct PriorityQueue priority_queue;
-
     priority_queue_init(&priority_queue);
 
     int num1 = 10;
@@ -265,4 +266,12 @@ int priority_queue_test()
     priority_queue_delete(&priority_queue);
 
     return 0;
+}
+
+int octree_test()
+{
+    struct Octree octree;
+    octree_init(&octree, (float[3]){0.0f, 0.0f, 0.0f}, (float[3]){1.0f, 1.0f, 1.0f});
+
+    octree_delete(&octree);
 }
