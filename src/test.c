@@ -273,5 +273,7 @@ int octree_test()
     struct Octree octree;
     octree_init(&octree, (float[3]){0.0f, 0.0f, 0.0f}, (float[3]){1.0f, 1.0f, 1.0f});
 
+    struct OctreePoint *octreePoints = malloc(sizeof(struct OctreePoint) * 1000);
+
     octree_delete(&octree);
 }
