@@ -19,6 +19,5 @@ typedef double real;
 #include "queue.h"
 #include "stack.h"
 #include "vector.h"
-#include "octree.h"
 
 #endif
