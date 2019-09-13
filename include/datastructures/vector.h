@@ -98,7 +98,6 @@ static inline void* vector_get(struct Vector* vector, size_t index) {
 #ifdef BOUNDS_CHECK
   if (index >= 0 && index < vector->size)
     return (char*)vector->items + (vector->memory_size * index);
-
   return NULL;
 #else
   return (char*)vector->items + (vector->memory_size * index);

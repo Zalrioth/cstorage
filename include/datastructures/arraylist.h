@@ -89,7 +89,6 @@ static inline void* array_list_get(struct ArrayList* array_list, size_t index) {
 #ifdef BOUNDS_CHECK
   if (index >= 0 && index < array_list->size)
     return array_list->items[index];
-
   return NULL;
 #else
   return array_list->items[index];
