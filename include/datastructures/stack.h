@@ -2,6 +2,8 @@
 #ifndef STACK_H_
 #define STACK_H_
 
+/* Stack in C, Nick Bedner */
+
 #define STACK_INIT_CAPACITY 4
 
 struct Stack {
