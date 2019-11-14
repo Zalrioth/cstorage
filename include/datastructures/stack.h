@@ -1,6 +1,6 @@
 #pragma once
-#ifndef STACK_H_
-#define STACK_H_
+#ifndef STACK_H
+#define STACK_H
 
 /* Stack in C, Nick Bedner */
 
@@ -77,4 +77,4 @@ static inline void stack_clear(struct Stack* stack) {
   stack_resize(stack, STACK_INIT_CAPACITY);
 }
 
-#endif
+#endif  // STACK_H

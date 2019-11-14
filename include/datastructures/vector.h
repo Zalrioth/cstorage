@@ -1,10 +1,8 @@
 #pragma once
-#ifndef VECTOR_H_
-#define VECTOR_H_
+#ifndef VECTOR_H
+#define VECTOR_H
 
 /* Memory aligned vector in C, Nick Bedner */
-
-// TODO: Move
 
 #define VECTOR_INIT_CAPACITY 4
 #define VECTOR_RESIZE_FACTOR 2
@@ -130,4 +128,4 @@ static inline void vector_clear(struct Vector* vector) {
   //vector->items = malloc(vector->memory_size * vector->capacity);
 }
 
-#endif
+#endif  // VECTOR_H

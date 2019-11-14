@@ -1,6 +1,6 @@
 #pragma once
-#ifndef QUEUE_H_
-#define QUEUE_H_
+#ifndef QUEUE_H
+#define QUEUE_H
 
 /* Queue in C, Nick Bedner */
 
@@ -80,4 +80,4 @@ static inline void queue_clear(struct Queue* queue) {
   queue->back = queue->capacity - 1;
 }
 
-#endif
+#endif  // QUEUE_H

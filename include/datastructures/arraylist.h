@@ -1,6 +1,6 @@
 #pragma once
-#ifndef ARRAY_LIST_H_
-#define ARRAY_LIST_H_
+#ifndef ARRAY_LIST_H
+#define ARRAY_LIST_H
 
 /* Array list in C, Nick Bedner */
 
@@ -127,4 +127,4 @@ static inline void array_list_clear_free(struct ArrayList* array_list) {
   array_list_resize(array_list, ARRAY_LIST_INIT_CAPACITY);
 }
 
-#endif
+#endif  // ARRAY_LIST_H

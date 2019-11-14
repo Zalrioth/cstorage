@@ -1,6 +1,6 @@
 #pragma once
-#ifndef PRIORITY_QUEUE_H_
-#define PRIORITY_QUEUE_H_
+#ifndef PRIORITY_QUEUE_H
+#define PRIORITY_QUEUE_H
 
 /* Priority queue in C, Nick Bedner */
 
@@ -112,4 +112,4 @@ static inline void priority_queue_clear_free(struct PriorityQueue* priority_queu
   priority_queue->head = priority_queue->tail = NULL;
 }
 
-#endif
+#endif  // PRIORITY_QUEUE_H

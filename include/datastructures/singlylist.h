@@ -1,6 +1,6 @@
 #pragma once
-#ifndef QUEUE_H_
-#define QUEUE_H_
+#ifndef SINGLY_LIST_H
+#define SINGLY_LIST_H
 
 /* Singly linked list in C, Nick Bedner */
 
@@ -134,4 +134,4 @@ static inline void singly_list_clear_free(struct SinglyList* singly_list) {
   singly_list->head = singly_list->tail = NULL;
 }
 
-#endif
+#endif  // SINGLY_LIST_H
