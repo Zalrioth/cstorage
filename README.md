@@ -6,7 +6,7 @@
 
 ## Settings up a Project
 
-Include the datastructures.h header and you're ready to go. Vector is memory aligned and compatible with Vulkan/OpenGL.
+Include the cstorage.h header and you're ready to go. Vector is memory aligned and compatible with Vulkan/OpenGL.
 
 ### Implemented
 
