@@ -4,6 +4,8 @@
 
 /* Priority queue in C, Nick Bedner */
 
+#include "common.h"
+
 struct PriorityQueueNode {
   void* data;
   size_t priority;

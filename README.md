@@ -22,14 +22,14 @@ Generic Implementations<br/>
 Singly Linked List<br/>
 Doubly Linked List<br/>
 Map<br/>
-Octree<br/>
 
 ### Planned
 
+Big O Chart<br/>
+Benchmarks<br/>
 Deque<br/>
 Hash Set<br/>
 Hash Map<br/>
 Linked Hash Map<br/>
+Octree<br/>
 Quadtree<br/>
-Big O Chart<br/>
-Benchmarks<br/>
