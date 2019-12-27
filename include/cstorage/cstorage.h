@@ -1,23 +1,14 @@
 #pragma once
-#ifndef DATA_STRUCTURES_H
-#define DATA_STRUCTURES_H
+#ifndef C_STORAGE_H
+#define C_STORAGE_H
 
 #include <stdlib.h>
 #include <string.h>
-
-#define BOUNDS_CHECK
-#if 1
-#define SINGLE_PRECISION
-typedef float real;
-#else
-#define DOUBLE_PRECISION
-typedef double real;
-#endif
-
 #include "arraylist.h"
+#include "map.h"
 #include "priorityqueue.h"
 #include "queue.h"
 #include "stack.h"
 #include "vector.h"
 
-#endif
+#endif  // C_STORAGE_H

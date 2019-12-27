@@ -4,7 +4,8 @@
 
 /* Map in C, Nick Bedner */
 
-#include "common.h"
+#include <stdlib.h>
+#include <string.h>
 
 struct MapNode {
   unsigned int hash;
@@ -66,7 +67,7 @@ static inline int map_bucket_idx(struct Map* map, unsigned int hash) {
 }
 
 static inline void map_add_node(struct Map* map, struct MapNode* node) {
-  int n = map_bucketidx(map, node->hash);
+  int n = map_bucket_idx(map, node->hash);
   node->next = map->buckets[n];
   map->buckets[n] = node;
 }
@@ -121,7 +122,7 @@ static inline struct MapNode** map_get_ref(struct Map* map, const char* key) {
   return NULL;
 }
 
-static inline void* map_get(struct MapBase* map, const char* key) {
+static inline void* map_get(struct Map* map, const char* key) {
   struct MapNode** next = map_get_ref(map, key);
   return next ? (*next)->value : NULL;
 }
@@ -136,7 +137,7 @@ static inline int map_set(struct Map* map, const char* key, void* value, int vsi
     return 0;
   }
 
-  node = map_newnode(key, value, vsize);
+  node = map_new_node(key, value, vsize);
   if (node == NULL)
     goto fail;
   if (map->num_nodes >= map->num_buckets) {
@@ -145,7 +146,7 @@ static inline int map_set(struct Map* map, const char* key, void* value, int vsi
     if (err)
       goto fail;
   }
-  map_addnode(map, node);
+  map_add_node(map, node);
   map->num_nodes++;
   return 0;
 fail:

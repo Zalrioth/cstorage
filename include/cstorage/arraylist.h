@@ -4,6 +4,9 @@
 
 /* Array list in C, Nick Bedner */
 
+#include <stdlib.h>
+#include <string.h>
+
 #define ARRAY_LIST_INIT_CAPACITY 4
 #define ARRAY_LIST_RESIZE_FACTOR 1.5
 
@@ -53,10 +56,9 @@ static inline void array_list_add(struct ArrayList* array_list, void* item) {
 }
 
 static inline void* array_list_pop_back(struct ArrayList* array_list) {
-#ifdef BOUNDS_CHECK
   if (array_list->size == 0)
     return NULL;
-#endif
+
   if (array_list->size > 0 && array_list->size == array_list->capacity / 4)
     array_list_resize(array_list, array_list->capacity / 2);
 
@@ -64,10 +66,9 @@ static inline void* array_list_pop_back(struct ArrayList* array_list) {
 }
 
 static inline void array_list_insert(struct ArrayList* array_list, size_t index, void* item) {
-#ifdef BOUNDS_CHECK
   if (index < 0 || index >= array_list->size)
     return;
-#endif
+
   if (array_list->capacity == array_list->size)
     array_list_resize(array_list, array_list->capacity * ARRAY_LIST_RESIZE_FACTOR);
 
@@ -77,22 +78,14 @@ static inline void array_list_insert(struct ArrayList* array_list, size_t index,
 }
 
 static inline void array_list_set(struct ArrayList* array_list, size_t index, void* item) {
-#ifdef BOUNDS_CHECK
   if (index >= 0 && index < array_list->size)
     array_list->items[index] = item;
-#else
-  array_list->items[index] = item;
-#endif
 }
 
 static inline void* array_list_get(struct ArrayList* array_list, size_t index) {
-#ifdef BOUNDS_CHECK
   if (index >= 0 && index < array_list->size)
     return array_list->items[index];
   return NULL;
-#else
-  return array_list->items[index];
-#endif
 }
 
 static inline int array_list_exists(struct ArrayList* array_list, size_t index) {
@@ -100,12 +93,10 @@ static inline int array_list_exists(struct ArrayList* array_list, size_t index) 
 }
 
 static inline void array_list_remove(struct ArrayList* array_list, size_t index) {
-#ifdef BOUNDS_CHECK
   if (index < 0 || index >= array_list->size)
     return;
-#endif
-  memmove((char*)array_list->items + (sizeof(void*) * index), (char*)array_list->items + (sizeof(void*) * (index + 1)), sizeof(void*) * (array_list->size - (index + 1)));
 
+  memmove((char*)array_list->items + (sizeof(void*) * index), (char*)array_list->items + (sizeof(void*) * (index + 1)), sizeof(void*) * (array_list->size - (index + 1)));
   array_list->size--;
 
   if (array_list->size > 0 && array_list->size == array_list->capacity / 4)

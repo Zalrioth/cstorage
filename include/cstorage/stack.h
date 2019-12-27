@@ -4,6 +4,9 @@
 
 /* Stack in C, Nick Bedner */
 
+#include <stdlib.h>
+#include <string.h>
+
 #define STACK_INIT_CAPACITY 4
 
 struct Stack {
@@ -37,7 +40,6 @@ static inline size_t stack_capacity(struct Stack* stack) {
 static inline void stack_resize(struct Stack* stack, size_t capacity) {
   void** newItems = realloc((char*)stack->items, sizeof(void*) * capacity);
 
-  // If realloc fails stack will not be resized
   if (newItems) {
     stack->items = newItems;
     stack->capacity = capacity;
@@ -52,10 +54,9 @@ static inline void stack_push(struct Stack* stack, void* item) {
 }
 
 static inline void* stack_pop(struct Stack* stack) {
-#ifdef BOUNDS_CHECK
   if (stack_empty(stack))
     return NULL;
-#endif
+
   if (stack->top > 0 && stack->top == stack->capacity / 4)
     stack_resize(stack, stack->capacity / 2);
 
@@ -64,10 +65,9 @@ static inline void* stack_pop(struct Stack* stack) {
 
 //TODO: Check asm here could be optimized probably
 static inline void* stack_peek(struct Stack* stack) {
-#ifdef BOUNDS_CHECK
   if (stack_empty(stack))
     return NULL;
-#endif
+
   return stack->items[stack->top - 1];
 }
 

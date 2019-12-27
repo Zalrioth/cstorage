@@ -4,6 +4,9 @@
 
 /* Singly linked list in C, Nick Bedner */
 
+#include <stdlib.h>
+#include <string.h>
+
 struct SinglyListNode {
   void* data;
   struct SinglyListNode* next;

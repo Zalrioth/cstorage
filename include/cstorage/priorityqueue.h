@@ -4,7 +4,8 @@
 
 /* Priority queue in C, Nick Bedner */
 
-#include "common.h"
+#include <stdlib.h>
+#include <string.h>
 
 struct PriorityQueueNode {
   void* data;
@@ -39,7 +40,6 @@ static inline int priority_queue_empty(struct PriorityQueue* priority_queue) {
   return priority_queue->size == 0;
 }
 
-//TODO: Make this faster
 static inline void priority_queue_push(struct PriorityQueue* priority_queue, void* item, size_t priority) {
   struct PriorityQueueNode* new_node = malloc(sizeof(struct PriorityQueueNode));
   new_node->data = item;
@@ -65,10 +65,8 @@ static inline void priority_queue_push(struct PriorityQueue* priority_queue, voi
 }
 
 static inline void* priority_queue_pop(struct PriorityQueue* priority_queue) {
-#ifdef BOUNDS_CHECK
   if (priority_queue_empty(priority_queue))
     return NULL;
-#endif
 
   struct PriorityQueueNode* temp_node = priority_queue->head->next;
   void* node_data = priority_queue->head->data;

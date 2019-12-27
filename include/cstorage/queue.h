@@ -4,6 +4,9 @@
 
 /* Queue in C, Nick Bedner */
 
+#include <stdlib.h>
+#include <string.h>
+
 struct Queue {
   size_t size;
   size_t capacity;
@@ -36,20 +39,18 @@ static inline int queue_full(struct Queue* queue) {
 }
 
 static inline void queue_push(struct Queue* queue, void* item) {
-#ifdef BOUNDS_CHECK
   if (queue->size == queue->capacity)
     return;
-#endif
+
   queue->back = (queue->back + 1) % queue->capacity;
   queue->items[queue->back] = item;
   queue->size++;
 }
 
 static inline void* queue_pop(struct Queue* queue) {
-#ifdef BOUNDS_CHECK
   if (queue_empty(queue))
     return NULL;
-#endif
+
   void* item_data = queue->items[queue->front];
   queue->front = (queue->front + 1) % queue->capacity;
   queue->size--;
@@ -58,19 +59,15 @@ static inline void* queue_pop(struct Queue* queue) {
 }
 
 static inline void* queue_front(struct Queue* queue) {
-#ifdef BOUNDS_CHECK
   if (queue_empty(queue))
     return NULL;
-#endif
 
   return queue->items[queue->front];
 }
 
 static inline void* queue_back(struct Queue* queue) {
-#ifdef BOUNDS_CHECK
   if (queue_empty(queue))
     return NULL;
-#endif
 
   return queue->items[queue->back];
 }
