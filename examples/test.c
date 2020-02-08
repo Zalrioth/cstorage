@@ -1,4 +1,5 @@
 #include <stdio.h>
+
 #include "../include/cstorage/cstorage.h"
 
 int vector_test();
@@ -6,26 +7,15 @@ int stack_test();
 int queue_test();
 int array_list_test();
 int priority_queue_test();
-//int octree_test();
+int map_test();
 
 int main(int argc, char *argv[]) {
-  if (vector_test() == 0)
-    printf("Vector test passed!\n");
-
-  if (stack_test() == 0)
-    printf("Stack test passed!\n");
-
-  if (queue_test() == 0)
-    printf("Queue test passed!\n");
-
-  if (array_list_test() == 0)
-    printf("Array list test passed!\n");
-
-  if (priority_queue_test() == 0)
-    printf("Priority queue test passed!\n");
-
-  //if (octree_test() == 0)
-  //  printf("Octree test passed!\n");
+  vector_test();
+  stack_test();
+  queue_test();
+  array_list_test();
+  priority_queue_test();
+  map_test();
 
   return 0;
 }
@@ -262,12 +252,28 @@ int priority_queue_test() {
   return 0;
 }
 
-//int octree_test()
-//{
-//    struct Octree octree;
-//    octree_init(&octree, (float[3]){0.0f, 0.0f, 0.0f}, (float[3]){1.0f, 1.0f, 1.0f});
-//
-//    struct OctreePoint *octreePoints = malloc(sizeof(struct OctreePoint) * 1000);
-//
-//    octree_delete(&octree);
-//}
+int map_test() {
+  struct Map map = {0};
+  map_init(&map, sizeof(int));
+
+  int value = 123;
+
+  map_set(&map, "testkey1", &value);
+  map_set(&map, "testkey2", &value);
+  map_set(&map, "testkey3", &value);
+  map_set(&map, "testkey4", &value);
+
+  int *val = map_get(&map, "testkey3");
+  if (val)
+    printf("Value: %d\n", *val);
+  else
+    printf("Value not found\n");
+
+  const char *key;
+  struct MapIter iter = map_iter();
+
+  while ((key = map_next(&map, &iter)))
+    printf("%s -> %d\n", key, *(int *)map_get(&map, key));
+
+  map_delete(&map);
+}

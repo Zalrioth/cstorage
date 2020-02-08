@@ -17,6 +17,7 @@ struct Map {
   struct MapNode** buckets;
   unsigned int num_buckets;
   unsigned int num_nodes;
+  size_t memory_size;
 };
 
 struct MapIter {
@@ -24,8 +25,9 @@ struct MapIter {
   struct MapNode* node;
 };
 
-static inline void map_init(struct Map* map) {
+static inline void map_init(struct Map* map, size_t memory_size) {
   memset(map, 0, sizeof(struct Map));
+  map->memory_size = memory_size;
 }
 
 static inline void map_delete(struct Map* map) {
@@ -53,12 +55,16 @@ static inline struct MapNode* map_new_node(const char* key, void* value, int vsi
   struct MapNode* node;
   int ksize = strlen(key) + 1;
   int voffset = ksize + ((sizeof(void*) - ksize) % sizeof(void*));
+
   node = malloc(sizeof(*node) + voffset + vsize);
-  if (!node) return NULL;
+  if (!node)
+    return NULL;
+
   memcpy(node + 1, key, ksize);
   node->hash = map_hash(key);
   node->value = ((char*)(node + 1)) + voffset;
   memcpy(node->value, value, vsize);
+
   return node;
 }
 
@@ -94,6 +100,7 @@ static int map_resize(struct Map* map, int num_buckets) {
     map->buckets = buckets;
     map->num_buckets = num_buckets;
   }
+
   if (map->buckets) {
     memset(map->buckets, 0, sizeof(*map->buckets) * map->num_buckets);
 
@@ -119,6 +126,7 @@ static inline struct MapNode** map_get_ref(struct Map* map, const char* key) {
       next = &(*next)->next;
     }
   }
+
   return NULL;
 }
 
@@ -127,17 +135,17 @@ static inline void* map_get(struct Map* map, const char* key) {
   return next ? (*next)->value : NULL;
 }
 
-static inline int map_set(struct Map* map, const char* key, void* value, int vsize) {
+static inline int map_set(struct Map* map, const char* key, void* value) {
   int n, err;
   struct MapNode **next, *node;
 
   next = map_get_ref(map, key);
   if (next) {
-    memcpy((*next)->value, value, vsize);
+    memcpy((*next)->value, value, map->memory_size);
     return 0;
   }
 
-  node = map_new_node(key, value, vsize);
+  node = map_new_node(key, value, map->memory_size);
   if (node == NULL)
     goto fail;
   if (map->num_nodes >= map->num_buckets) {
@@ -152,6 +160,7 @@ static inline int map_set(struct Map* map, const char* key, void* value, int vsi
 fail:
   if (node)
     free(node);
+
   return -1;
 }
 
@@ -185,6 +194,7 @@ static inline const char* map_next(struct Map* map, struct MapIter* iter) {
       iter->node = map->buckets[iter->bucket_idx];
     } while (iter->node == NULL);
   }
+
   return (char*)(iter->node + 1);
 }
 
