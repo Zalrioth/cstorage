@@ -2,8 +2,6 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-/* Queue in C, Nick Bedner */
-
 #include <stdlib.h>
 #include <string.h>
 

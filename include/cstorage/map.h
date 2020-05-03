@@ -2,8 +2,6 @@
 #ifndef MAP_H
 #define MAP_H
 
-/* Map in C, Nick Bedner */
-
 #include <stdlib.h>
 #include <string.h>
 

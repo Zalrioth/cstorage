@@ -2,8 +2,6 @@
 #ifndef ARRAY_LIST_H
 #define ARRAY_LIST_H
 
-/* Array list in C, Nick Bedner */
-
 #include <stdlib.h>
 #include <string.h>
 

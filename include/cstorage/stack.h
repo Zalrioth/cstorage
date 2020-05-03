@@ -2,8 +2,6 @@
 #ifndef STACK_H
 #define STACK_H
 
-/* Stack in C, Nick Bedner */
-
 #include <stdlib.h>
 #include <string.h>
 

@@ -2,8 +2,6 @@
 #ifndef PRIORITY_QUEUE_H
 #define PRIORITY_QUEUE_H
 
-/* Priority queue in C, Nick Bedner */
-
 #include <stdlib.h>
 #include <string.h>
 

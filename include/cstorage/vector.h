@@ -2,8 +2,6 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
-/* Memory aligned vector in C, Nick Bedner */
-
 #include <stdlib.h>
 #include <string.h>
 

@@ -2,8 +2,6 @@
 #ifndef SINGLY_LIST_H
 #define SINGLY_LIST_H
 
-/* Singly linked list in C, Nick Bedner */
-
 #include <stdlib.h>
 #include <string.h>
 

@@ -11,6 +11,7 @@ Include the cstorage.h header and you're ready to go. Vector is memory aligned a
 ### Implemented
 
 Array List<br/>
+Map<br/>
 Queue<br/>
 Priority Queue<br/>
 Stack<br/>
@@ -18,10 +19,8 @@ Vector<br/>
 
 ### In Progress
 
-Generic Implementations<br/>
 Singly Linked List<br/>
 Doubly Linked List<br/>
-Map<br/>
 
 ### Planned
 
@@ -29,7 +28,6 @@ Big O Chart<br/>
 Benchmarks<br/>
 Deque<br/>
 Hash Set<br/>
-Hash Map<br/>
-Linked Hash Map<br/>
 Octree<br/>
 Quadtree<br/>
+SIMD<br/>
