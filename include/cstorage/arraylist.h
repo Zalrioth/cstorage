@@ -86,6 +86,12 @@ static inline void* array_list_get(struct ArrayList* array_list, size_t index) {
   return NULL;
 }
 
+static inline void array_list_swap(struct ArrayList* array_list, size_t index1, size_t index2) {
+  void* temp = array_list->items[index1];
+  array_list->items[index1] = array_list->items[index2];
+  array_list->items[index2] = temp;
+}
+
 static inline int array_list_exists(struct ArrayList* array_list, size_t index) {
   return index >= 0 && index < array_list->size;
 }
