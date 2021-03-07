@@ -67,7 +67,7 @@ static inline void vector_pop_back(struct Vector* vector, void* copy_buffer) {
 }
 
 static inline void vector_insert(struct Vector* vector, size_t index, void* item) {
-  if (index < 0 || index >= vector->size)
+  if (index >= vector->size)
     return;
 
   if (vector->capacity == vector->size)
@@ -80,22 +80,22 @@ static inline void vector_insert(struct Vector* vector, size_t index, void* item
 }
 
 static inline void vector_set(struct Vector* vector, size_t index, void* item) {
-  if (index >= 0 && index < vector->size)
+  if (index < vector->size)
     memcpy((char*)vector->items + (vector->memory_size * index), item, vector->memory_size);
 }
 
 static inline void* vector_get(struct Vector* vector, size_t index) {
-  if (index >= 0 && index < vector->size)
+  if (index < vector->size)
     return (char*)vector->items + (vector->memory_size * index);
   return NULL;
 }
 
 static inline int vector_exists(struct Vector* vector, size_t index) {
-  return index >= 0 && index < vector->size;
+  return index < vector->size;
 }
 
 static inline void vector_remove(struct Vector* vector, size_t index) {
-  if (index < 0 || index >= vector->size)
+  if (index >= vector->size)
     return;
 
   memmove((char*)vector->items + (vector->memory_size * index), (char*)vector->items + (vector->memory_size * (index + 1)), vector->memory_size * (vector->size - (index + 1)));

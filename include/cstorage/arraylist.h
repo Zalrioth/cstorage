@@ -64,7 +64,7 @@ static inline void* array_list_pop_back(struct ArrayList* array_list) {
 }
 
 static inline void array_list_insert(struct ArrayList* array_list, size_t index, void* item) {
-  if (index < 0 || index >= array_list->size)
+  if (index >= array_list->size)
     return;
 
   if (array_list->capacity == array_list->size)
@@ -76,12 +76,12 @@ static inline void array_list_insert(struct ArrayList* array_list, size_t index,
 }
 
 static inline void array_list_set(struct ArrayList* array_list, size_t index, void* item) {
-  if (index >= 0 && index < array_list->size)
+  if (index < array_list->size)
     array_list->items[index] = item;
 }
 
 static inline void* array_list_get(struct ArrayList* array_list, size_t index) {
-  if (index >= 0 && index < array_list->size)
+  if (index < array_list->size)
     return array_list->items[index];
   return NULL;
 }
@@ -93,11 +93,11 @@ static inline void array_list_swap(struct ArrayList* array_list, size_t index1, 
 }
 
 static inline int array_list_exists(struct ArrayList* array_list, size_t index) {
-  return index >= 0 && index < array_list->size;
+  return index < array_list->size;
 }
 
 static inline void array_list_remove(struct ArrayList* array_list, size_t index) {
-  if (index < 0 || index >= array_list->size)
+  if (index >= array_list->size)
     return;
 
   memmove((char*)array_list->items + (sizeof(void*) * index), (char*)array_list->items + (sizeof(void*) * (index + 1)), sizeof(void*) * (array_list->size - (index + 1)));
