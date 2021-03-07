@@ -115,9 +115,8 @@ static int map_resize(struct Map* map, int num_buckets) {
 
 static inline struct MapNode** map_get_ref(struct Map* map, const char* key) {
   unsigned hash = map_hash(key);
-  struct MapNode** next;
   if (map->num_buckets > 0) {
-    next = &map->buckets[map_bucket_idx(map, hash)];
+    struct MapNode** next = &map->buckets[map_bucket_idx(map, hash)];
     while (*next) {
       if ((*next)->hash == hash && !strcmp((char*)(*next + 1), key))
         return next;
@@ -163,10 +162,9 @@ fail:
 }
 
 static inline void map_remove(struct Map* map, const char* key) {
-  struct MapNode* node;
   struct MapNode** next = map_get_ref(map, key);
   if (next) {
-    node = *next;
+    struct MapNode* node = *next;
     *next = (*next)->next;
     free(node);
     map->num_nodes--;
@@ -180,7 +178,7 @@ static inline struct MapIter map_iter() {
   return iter;
 }
 
-static inline const char* map_next(struct Map* map, struct MapIter* iter) {
+static inline char* map_next(struct Map* map, struct MapIter* iter) {
   if (iter->node) {
     iter->node = iter->node->next;
     if (iter->node == NULL) goto nextBucket;
@@ -194,6 +192,10 @@ static inline const char* map_next(struct Map* map, struct MapIter* iter) {
   }
 
   return (char*)(iter->node + 1);
+}
+
+static inline void* map_get_by_index(struct Map* map, size_t index) {
+  return (*(map->buckets + index))->value;
 }
 
 #endif  // MAP_H
